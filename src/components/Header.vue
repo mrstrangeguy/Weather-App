@@ -40,7 +40,7 @@
             </div>
         </div>
         
-        <div v-if="isExpandableMenuVisible" class="header__expandable-temperature-menu" >
+        <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" >
             <div class="header__expandable-temperature-menu__content">
               <div class="header__expandable-temperature-menu__content__temp-details">
                  <div class="header__expandable-temperature-menu__content__temp-details__temp-options">
@@ -65,7 +65,7 @@
             </div>
         </div>
         
-        <div v-if="isExpandableTopicsMenuVisible" class="header__expandable-topics-menu">
+        <div v-if="isExpandableTopicsMenuVisible" class="header-popup header__expandable-topics-menu">
           <div class="header__expandable-topics-menu__content">
               <div class="header__expandable-topics-menu__content__navs">
                 <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
@@ -166,6 +166,10 @@ import navItems from '../data/navItems.json'
 </script>
 
 <style lang="scss" scoped>
+
+   .header-popup {
+    background-color: white;
+   }
 
   .header-btn {
     border: 0;
