@@ -68,9 +68,9 @@
         <div v-if="isExpandableTopicsMenuVisible" class="header__expandable-topics-menu">
           <div class="header__expandable-topics-menu__content">
               <div class="header__expandable-topics-menu__content__navs">
-                <nav v-for="(elem,index) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
+                <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
                   <span class="header__expandable-topics-menu__content__navs__nav__heading">{{ elem.title }}</span>
-                  <button v-for="(btnData,index) in elem.details" class="header-btn header__expandable-topics-menu__content__navs__nav__btn">{{ btnData }}</button> 
+                  <button v-for="(btnData,index) in elem.details" :key="index" class="header-btn header__expandable-topics-menu__content__navs__nav__btn">{{ btnData }}</button> 
                 </nav>
               </div>
           </div>
