@@ -1,0 +1,28 @@
+
+[
+    {
+        "id":1,
+        "region":"Americas",
+        "countries":["Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language"]
+    },
+    {
+        "id":2,
+        "region":"Africa",
+        "countries":["Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language"]
+    },
+    {
+        "id":3,
+        "region":"Asia Pacific",
+        "countries":["Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language"]
+    },
+    {
+        "id":4,
+        "region":"Europe",
+        "countries":["Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language"]
+    },
+    {
+        "id":5,
+        "region":"Middle East",
+        "countries":["Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language","Coutry | Language"]
+    }
+]
