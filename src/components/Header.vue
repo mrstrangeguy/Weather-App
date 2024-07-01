@@ -40,7 +40,7 @@
             </div>
         </div>
         
-        <div v-if="isExpandableMenuVisible" class="header__expandable-temperature-menu" >
+        <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" >
             <div class="header__expandable-temperature-menu__content">
               <div class="header__expandable-temperature-menu__content__temp-details">
                  <div class="header__expandable-temperature-menu__content__temp-details__temp-options">
@@ -65,12 +65,12 @@
             </div>
         </div>
         
-        <div v-if="isExpandableTopicsMenuVisible" class="header__expandable-topics-menu">
+        <div v-if="isExpandableTopicsMenuVisible" class="header-popup header__expandable-topics-menu">
           <div class="header__expandable-topics-menu__content">
               <div class="header__expandable-topics-menu__content__navs">
-                <nav v-for="(elem,index) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
+                <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
                   <span class="header__expandable-topics-menu__content__navs__nav__heading">{{ elem.title }}</span>
-                  <button v-for="(btnData,index) in elem.details" class="header-btn header__expandable-topics-menu__content__navs__nav__btn">{{ btnData }}</button> 
+                  <button v-for="(btnData,index) in elem.details" :key="index" class="header-btn header__expandable-topics-menu__content__navs__nav__btn">{{ btnData }}</button> 
                 </nav>
               </div>
           </div>
@@ -166,6 +166,10 @@ import navItems from '../data/navItems.json'
 </script>
 
 <style lang="scss" scoped>
+
+   .header-popup {
+    background-color: white;
+   }
 
   .header-btn {
     border: 0;
@@ -444,6 +448,7 @@ import navItems from '../data/navItems.json'
         width: 100vw;
         box-shadow: 3px 3px 20px rgba(0, 0, 0,0.2);
         position: absolute;
+        background: white;
 
          &__content {
           max-width: 1280px;

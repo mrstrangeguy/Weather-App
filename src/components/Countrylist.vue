@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 const data = ref<string[]>(new Array(39).fill('Coutry | Language'));
   
