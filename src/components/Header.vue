@@ -1,61 +1,63 @@
 <template>
-    <div class="header">
-        <div class="header__top-section">
+    <div class="header" @click="closeAllPopup">
+        <div class="header__top-section" >
             <div class="header__top-section__content">
               <div class="header__top-section__content__logo-section">
                 <a class="header__top-section__content__logo-section__link">
-                   <img class="header__top-section__content__logo-section__link__img" src="../images/logo-header.svg" alt="">
+                   <img class="header__top-section__content__logo-section__link__img header-logo" src="../images/logo-header.svg" alt="">
                 </a>
                 <div class="header__top-section__content__logo-section__divider"></div>
                 <a class="header__top-section__content__logo-section__logo2-link">
-                    <img class="header__top-section__content__logo-section__logo2-link__img" src="../images/toi-logo.png" alt="">
+                    <img class="header__top-section__content__logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="">
                 </a>
               </div>
               <div class="header__top-section__content__main-menu-section">
                 <div class="header__top-section__content__main-menu-section__search-section">
                     <div class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper">
-                    <input class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper__input-tag" :placeholder="searchPlaceholder" type="text">
-                    <img class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper__logo" src="../images/search-icon.svg" alt="">
+                    <input :class="`header__top-section__content__main-menu-section__search-section__input-tag-wrapper__input-tag ${isInputFocused && 'focused-input'}`" :placeholder="searchPlaceholder" ref="inputRef" @focus="isInputFocused = true" @focusout="isInputFocused = false" type="text">
+                    <img class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper__logo header-logo" src="../images/search-icon.svg" alt="">
                   </div>
                 </div>
                 <div class="header__top-section__content__main-menu-section__lang-select-section">
-                  <button class="header-btn header__top-section__content__main-menu-section__lang-select-section__btn" @click="onToggleTemperatureMenu">
+                  <button :class="`header-btn header__top-section__content__main-menu-section__lang-select-section__btn ${isExpandableMenuVisible && 'temp-options-btn-outline'}`" @click.stop="onToggleTemperatureMenu()">
                     <div class="header__top-section__content__main-menu-section__lang-select-section__btn__icons">
                     <img src="../images/globe-icon.svg" alt="" class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__icon--globe">
                     <span class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__text--country">{{ country }}</span>
-                    <span class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__text--temp">{{ temperature }}</span>
-                    <img src="../images/arrow-down.svg" alt="" class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__icon--down-arrow">
+                    <span class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__text--temp">{{ getCurrentTempIndicator }}</span>
+                    <img src="../images/arrow-down.svg" alt="" :class="`${isExpandableMenuVisible && 'rotate-icon'} header__top-section__content__main-menu-section__lang-select-section__btn__icons__icon--down-arrow`">
                     
                     </div>
                   </button>
                 </div>
                 <div class="header__top-section__content__main-menu-section__options-toggle-section">
-                  <button class="header-btn header__top-section__content__main-menu-section__options-toggle-section__btn" @click="onToggleTopicsMenu">
+                  <button v-if="!isExpandableTopicsMenuVisible" class="header-btn header__top-section__content__main-menu-section__options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
                    <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
                    <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
                    <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
                   </button>
+
+                  <button v-else class="close-icon"></button>
                 </div>
               </div>
             </div>
         </div>
         
-        <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" >
+        <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" @click.stop>
             <div class="header__expandable-temperature-menu__content">
               <div class="header__expandable-temperature-menu__content__temp-details">
                  <div class="header__expandable-temperature-menu__content__temp-details__temp-options">
                   <ul class="header__expandable-temperature-menu__content__temp-details__temp-options__list">
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°F' ? 'selected-temp' : 'temp'}`" @click="currentTempScale = '°F'">°F</li>
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°C' ? 'selected-temp' : 'temp'}`" @click="currentTempScale = '°C'">°C</li>
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === 'Hybrid' ? 'selected-temp' : 'temp'}`" @click="currentTempScale = 'Hybrid'">Hybrid</li>
+                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°F' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
+                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°C' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
+                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === 'Hybrid' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
                   </ul>
                   <div class="header__expandable-temperature-menu__content__temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
                  </div>
 
               </div>
               <div class="header__expandable-temperature-menu__content__country-list">
-                   <div v-for="(elem,index) in headerCountryData" :key="index" class="header__expandable-temperature-menu__content__country-list__item" @click="setCurrentSelectId(elem.id)">
-                    <div  :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'}`">
+                   <div v-for="(elem,index) in headerCountryData" :key="index" class="header__expandable-temperature-menu__content__country-list__item" @click.stop="setCurrentSelectId(elem.id)">
+                    <div :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'}`">
                      <div class="header__expandable-temperature-menu__content__country-list__item__header__title">{{ elem.region }}</div>
                      <img class="header__expandable-temperature-menu__content__country-list__item__header__icon" src="../images/arrow-down-blue.svg" alt="">
                     </div>
@@ -65,7 +67,7 @@
             </div>
         </div>
         
-        <div v-if="isExpandableTopicsMenuVisible" class="header-popup header__expandable-topics-menu">
+        <div v-if="isExpandableTopicsMenuVisible" class="header-popup header__expandable-topics-menu" @click.stop>
           <div class="header__expandable-topics-menu__content">
               <div class="header__expandable-topics-menu__content__navs">
                 <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
@@ -129,15 +131,25 @@ import navItems from '../data/navItems.json'
   const currentTempScale = ref<string>('°C')
   const navData = ref<string[]>([]);
   const country = ref<string>('IN');
-  const temperature = ref<string>('°C');
   const forecastText = ref<string>('More Forecasts');
-  const currentWeatherDetails = ref<{temp:string,city:string,state:string}>({ temp:'31°',city:'Chennai',state:'Tamil Nadu' })
+  const currentWeatherDetails = ref<{temp:string,city:string,state:string}>({ temp:'31°',city:'Chennai',state:'Tamil Nadu' });
+  const isInputFocused = ref<boolean>(false);
 ;
   //onMounted
   onMounted(() => {
   headerCountryData.value = countryData;
   headerTopicsData.value = topicsData;
-  navData.value = navItems
+  navData.value = navItems;
+  
+  window.addEventListener('click',() => {
+
+   closeAllPopup();
+
+   return () => {
+     window.removeEventListener('click',closeAllPopup);
+   }
+  })
+
   })
 
   //computed
@@ -147,6 +159,10 @@ import navItems from '../data/navItems.json'
     else return 'Hybrid - C / millimeters / miles / mph / millibars'
   })
 
+  const getCurrentTempIndicator = computed(() => {
+    return currentTempScale.value === 'Hybrid' ? '°C' : currentTempScale.value
+  })
+
   //functions
   const setCurrentSelectId = (id:number) => {
     if(currentCountryId.value === id) currentCountryId.value = -1
@@ -154,6 +170,7 @@ import navItems from '../data/navItems.json'
   }
 
   const onToggleTemperatureMenu = () => {
+  
     isExpandableMenuVisible.value = !isExpandableMenuVisible.value;
     isExpandableTopicsMenuVisible.value = false;
   }
@@ -163,12 +180,86 @@ import navItems from '../data/navItems.json'
     isExpandableMenuVisible.value = false
   }
 
+  const closeAllPopup = () => {
+    isExpandableMenuVisible.value = false;
+    isExpandableTopicsMenuVisible.value = false;
+  }
+
 </script>
 
 <style lang="scss" scoped>
 
+   .focused-input::placeholder {
+     transition: opacity 0.4s ease;
+     opacity: 0;
+     text-overflow: ellipsis;
+   }
+
+  .temp-options-btn-outline {
+    outline: 5px auto #1b4de4;
+  }
+
+  .rotate-icon {
+    transform: rotate(180deg);
+  }
+
+   .header-logo {
+    cursor: pointer;
+   }
+
+   .close-icon {
+    display: block;
+    padding: 1px 6px;
+    margin: 5px 11px 5px 35px;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+   }
+
+   .close-icon::before {
+      display: block;
+      position: absolute;
+      content: '';
+      transform: 50% 50%;
+      background: #fff;
+      transform: rotate(45deg);
+      width: 30px;
+      max-width: 30px;
+      // border: 2px solid #fff;
+      background-color: white;
+      font-size: 16px;
+      border-radius: 2px;
+      height: 3px;
+      line-height: 18.4px;
+      bottom: 50%;
+      left: 0;
+   }
+
+   .close-icon::after {
+    display: block;
+      position: absolute;
+      content: '';
+      transform: 50% 50%;
+      background: #fff;
+      transform: rotate(-45deg);
+      width: 30px;
+      max-width: 30px;
+      // border: 2px solid #fff;
+      background-color: white;
+      font-size: 16px;
+      border-radius: 2px;
+      height: 3px;
+      line-height: 18.4px;
+      bottom: 50%;
+      left: 0;
+   }
+
    .header-popup {
     background-color: white;
+    z-index: 200;
    }
 
   .header-btn {
@@ -271,6 +362,7 @@ import navItems from '../data/navItems.json'
 
                 &__input-tag::placeholder {
                   color: white;
+                  transition: opacity 0.4s ease;
                 }
 
                 &__logo {
@@ -308,6 +400,8 @@ import navItems from '../data/navItems.json'
                       &--down-arrow {
                         width: 22px;
                         height: 17px;
+                        display: block;
+                        
                       }
                     }
 
@@ -483,6 +577,11 @@ import navItems from '../data/navItems.json'
                 line-height: 27px;
                 font-size: 16px;
                 padding: 6px 0px;
+                cursor: pointer;
+              }
+
+              &__btn:hover {
+                color: #1b4de4;
               }
             }
           }
