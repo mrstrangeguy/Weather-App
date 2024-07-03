@@ -31,6 +31,7 @@ const data = ref<string[]>(new Array(39).fill('Coutry | Language'));
         display: block;
         padding: 7px 0px;
     }
+
     }
    }
 
@@ -52,13 +53,32 @@ const data = ref<string[]>(new Array(39).fill('Coutry | Language'));
      }
    }
 
-   @media screen and (max-width:768px) {
-     .country-details {
-        &__content {
-            grid-template-columns: 1fr;
-            padding: 10px 15px 10px 60px;
+   @media screen and (max-width:790px) { 
+    .country-details { 
+      padding: 0px;
+
+      &__content {
+        grid-template-columns: 1fr 1fr;
+        padding: 10px 0px 30px 0px ;
+
+        &__link {
+          text-align: center;
         }
-     }
+   
+      }
+    }
    }
+
+   @media screen and (max-width:425px) { 
+    .country-details { 
+     
+      &__content {
+        grid-template-columns: 1fr;
+      }
+    }
+   }
+
+
+  
 
 </style>

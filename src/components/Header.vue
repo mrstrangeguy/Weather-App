@@ -2,35 +2,35 @@
     <div class="header" @click="closeAllPopup">
         <div class="header__top-section" >
             <div class="header__top-section__content">
-              <div class="header__top-section__content__logo-section">
-                <a class="header__top-section__content__logo-section__link">
-                   <img class="header__top-section__content__logo-section__link__img header-logo" src="../images/logo-header.svg" alt="">
+              <div class="header-logo-section">
+                <a class="header-logo-section__link">
+                   <img class="header-logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon">
                 </a>
-                <div class="header__top-section__content__logo-section__divider"></div>
-                <a class="header__top-section__content__logo-section__logo2-link">
-                    <img class="header__top-section__content__logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="">
+                <div class="header-logo-section__divider"></div>
+                <a class="header-logo-section__logo2-link">
+                    <img class="header-logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon">
                 </a>
               </div>
               <div class="header__top-section__content__main-menu-section">
-                <div class="header__top-section__content__main-menu-section__search-section">
-                    <div class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper">
-                    <input :class="`header__top-section__content__main-menu-section__search-section__input-tag-wrapper__input-tag ${isInputFocused && 'focused-input'}`" :placeholder="searchPlaceholder" ref="inputRef" @focus="isInputFocused = true" @focusout="isInputFocused = false" type="text">
-                    <img class="header__top-section__content__main-menu-section__search-section__input-tag-wrapper__logo header-logo" src="../images/search-icon.svg" alt="">
+                <div class="header-search-section">
+                    <div class="header-search-section__input-tag-wrapper">
+                    <input :class="`header-search-section__input-tag-wrapper__input-tag ${isInputFocused && 'focused-input'}`" :placeholder="searchPlaceholder" ref="inputRef" @focus="isInputFocused = true" @focusout="isInputFocused = false" type="text">
+                    <img class="header-search-section__input-tag-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
                   </div>
                 </div>
-                <div class="header__top-section__content__main-menu-section__lang-select-section">
-                  <button :class="`header-btn header__top-section__content__main-menu-section__lang-select-section__btn ${isExpandableMenuVisible && 'temp-options-btn-outline'}`" @click.stop="onToggleTemperatureMenu()">
-                    <div class="header__top-section__content__main-menu-section__lang-select-section__btn__icons">
-                    <img src="../images/globe-icon.svg" alt="" class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__icon--globe">
-                    <span class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__text--country">{{ country }}</span>
-                    <span class="header__top-section__content__main-menu-section__lang-select-section__btn__icons__text--temp">{{ getCurrentTempIndicator }}</span>
-                    <img src="../images/arrow-down.svg" alt="" :class="`${isExpandableMenuVisible && 'rotate-icon'} header__top-section__content__main-menu-section__lang-select-section__btn__icons__icon--down-arrow`">
+                <div class="header-lang-select-section">
+                  <button :class="`header-lang-select-section__button header-btn ${isExpandableMenuVisible && 'temp-options-btn-outline'}`" @click.stop="onToggleTemperatureMenu()">
+                    <div class="header-lang-select-section__button__icons">
+                    <img src="../images/globe-icon.svg" alt="globe-icon" class="header-lang-select-section__button__icons--globe">
+                    <span class="header-lang-select-section__button__icons__text--country">{{ country }}</span>
+                    <span class="header-lang-select-section__button__icons__text--temp">{{ getCurrentTempIndicator }}</span>
+                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="`${isExpandableMenuVisible && 'rotate-icon'} header-lang-select-section__button__icons--down-arrow`">
                     
                     </div>
                   </button>
                 </div>
-                <div class="header__top-section__content__main-menu-section__options-toggle-section">
-                  <button  class="header-btn header__top-section__content__main-menu-section__options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
+                <div class="header-top-options-toggle-section">
+                  <button  class="header-btn header-top-options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
                   <span :class="`hamburger-icon ${isExpandableTopicsMenuVisible && 'close-icon'}`"></span>                  
                   </button>
                 </div>
@@ -40,22 +40,22 @@
         
         <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" @click.stop>
             <div class="header__expandable-temperature-menu__content">
-              <div class="header__expandable-temperature-menu__content__temp-details">
-                 <div class="header__expandable-temperature-menu__content__temp-details__temp-options">
-                  <ul class="header__expandable-temperature-menu__content__temp-details__temp-options__list">
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°F' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === '°C' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
-                    <li :class="`header__expandable-temperature-menu__content__temp-details__temp-options__list__line ${currentTempScale === 'Hybrid' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
+              <div class="header-popup-temp-details">
+                 <div class="header-popup-temp-details__temp-options">
+                  <ul class="header-popup-temp-details__temp-options__list">
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === '°F' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === '°C' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === 'Hybrid' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
                   </ul>
-                  <div class="header__expandable-temperature-menu__content__temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
+                  <div class="header-popup-temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
                  </div>
 
               </div>
               <div class="header__expandable-temperature-menu__content__country-list">
-                   <div v-for="(elem,index) in headerCountryData" :key="index" class="header__expandable-temperature-menu__content__country-list__item outline--black" @click.stop="setCurrentSelectId(elem.id)">
-                    <div :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'}`">
+                   <div v-for="(elem,index) in headerCountryData" :key="index" :class="`header__expandable-temperature-menu__content__country-list__item `" @click.stop="setCurrentSelectId(elem.id)">
+                    <div :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'} ${elem.id === currentCountryId && 'outline--black'}`">
                      <div class="header__expandable-temperature-menu__content__country-list__item__header__title">{{ elem.region }}</div>
-                     <img class="header__expandable-temperature-menu__content__country-list__item__header__icon" src="../images/arrow-down-blue.svg" alt="">
+                     <img :class="`header__expandable-temperature-menu__content__country-list__item__header__icon ${currentCountryId === elem.id && 'rotate-country-list-icon'}`" src="../images/arrow-down-blue.svg" alt="angle-icon">
                     </div>
                     <CountryList v-if="currentCountryId === elem.id"/>
                     </div>
@@ -78,7 +78,7 @@
             <div class="header-contents-container header__city-weather-indicator__content">
               <div class="header__city-weather-indicator__content__card">
                 <a class="header__city-weather-indicator__content__card__link">
-                  <img src="../images/Foggy.svg" alt="" class="header__city-weather-indicator__content__card__link__img">
+                  <img src="../images/Foggy.svg" alt="angle-icon" class="header__city-weather-indicator__content__card__link__img">
                   <span class="header__city-weather-indicator__content__card__link__text">{{ currentWeatherDetails.temp }}</span>
                 </a>
 
@@ -100,16 +100,16 @@
            <div :class="`header__main-nav-wrapper__content__more-forecasts-options ${isMoreForecastsOptionVisible && 'temp-options-btn-outline'}`">
             <button class="header-btn  header__main-nav-wrapper__content__more-forecasts-options__btn" @click.stop="isMoreForecastsOptionVisible = !isMoreForecastsOptionVisible">
               <span class="header__main-nav-wrapper__content__more-forecasts-options__btn__text">{{ forecastText }}</span>
-              <img class="header__main-nav-wrapper__content__more-forecasts-options__btn__icon" src="../images/arrow-down.svg" alt="">
+              <img :class="`header__main-nav-wrapper__content__more-forecasts-options__btn__icon ${isMoreForecastsOptionVisible && 'rotate-icon margin-changes'}`" src="../images/arrow-down.svg" alt="angle-icon">
             </button>
-            <div v-if="isMoreForecastsOptionVisible" :class="`header__main-nav-wrapper__content__more-forecasts-options__popup`">
-             <h3 class="header__main-nav-wrapper__content__more-forecasts-options__popup__heading">Special Forecasts</h3>
-             <div class="header__main-nav-wrapper__content__more-forecasts-options__popup__description">
-              <a class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link" >
-                <span class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link__text">Allergy Tracker</span>
+            <div v-if="isMoreForecastsOptionVisible" :class="`header-more-forecasts-popup`">
+             <h3 class="header-more-forecasts-popup__heading">Special Forecasts</h3>
+             <div class="header-more-forecasts-popup__description">
+              <a class="header-more-forecasts-popup__description__link" >
+                <span class="header-more-forecasts-popup__description__link__text">Allergy Tracker</span>
               </a>
               <a class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link" >
-                <span class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link__text">Air Quality Forecast</span>
+                <span class="header-more-forecasts-popup__description__link__text">Air Quality Forecast</span>
               </a>
              </div>
             </div>
@@ -125,6 +125,7 @@ import { ref,onMounted,computed } from 'vue';
 import countryData from '../data/countryData.json'
 import countryDataType from '../types/coutryDataType';
 import topicsDataType from '../types/topicsDataType';
+import weatherDetailsType from '../types/weatherDetailsType'
 import CountryList from './Countrylist.vue'
 import topicsData from '../data/topicsData.json'
 import navItems from '../data/navItems.json'
@@ -134,12 +135,12 @@ import navItems from '../data/navItems.json'
   const currentCountryId = ref<number>(-1);
   const isExpandableMenuVisible = ref<boolean>(false);
   const headerTopicsData = ref<topicsDataType[]>([]);
-  const isExpandableTopicsMenuVisible = ref<boolean>(false)
-  const currentTempScale = ref<string>('°C')
+  const isExpandableTopicsMenuVisible = ref<boolean>(false);
+  const currentTempScale = ref<string>('°C');
   const navData = ref<string[]>([]);
   const country = ref<string>('IN');
   const forecastText = ref<string>('More Forecasts');
-  const currentWeatherDetails = ref<{temp:string,city:string,state:string}>({ temp:'31°',city:'Chennai',state:'Tamil Nadu' });
+  const currentWeatherDetails = ref<weatherDetailsType>({ temp:'31°',city:'Chennai',state:'Tamil Nadu' });
   const isInputFocused = ref<boolean>(false);
   const isMoreForecastsOptionVisible = ref<boolean>(false)
 ;
@@ -153,10 +154,14 @@ import navItems from '../data/navItems.json'
 
    closeAllPopup();
 
-   return () => {
+  });
+
+  window.addEventListener('resize',onResponsive);
+
+  return () => {
      window.removeEventListener('click',closeAllPopup);
+     window.removeEventListener('resize',onResponsive);
    }
-  })
 
   })
 
@@ -185,12 +190,28 @@ import navItems from '../data/navItems.json'
 
   const onToggleTopicsMenu = () => {
     isExpandableTopicsMenuVisible.value = !isExpandableTopicsMenuVisible.value;
-    isExpandableMenuVisible.value = false
+    isExpandableMenuVisible.value = false;
+    isMoreForecastsOptionVisible.value = false;
   }
 
   const closeAllPopup = () => {
     isExpandableMenuVisible.value = false;
     isExpandableTopicsMenuVisible.value = false;
+    isMoreForecastsOptionVisible.value = false;
+  }
+
+  const onResponsive = () => {
+
+      if(window.innerWidth > 790) {
+        forecastText.value = 'More Forecasts'
+      }
+     if(window.innerWidth <= 790) {
+      forecastText.value = 'More';
+     }
+
+     if(window.innerWidth <= 630) {
+      forecastText.value = '';
+     }
   }
 
 </script>
@@ -213,7 +234,10 @@ import navItems from '../data/navItems.json'
 
   .rotate-icon {
     transform: rotate(180deg);
-    margin-top: -5px;
+  }
+
+  .rotate-country-list-icon {
+    transform: rotate(180deg);
   }
 
    .header-logo {
@@ -290,14 +314,7 @@ import navItems from '../data/navItems.json'
     top: 0;
     transition: all 0.3s ease;
    }
-  //  .hamburger-icon::after {
-  //     transform: rotate(0deg);
-  //  }
-
-  //  .hamburger-icon::before {
-  //     transform: rotate(0deg);
-  //  }
-
+  
    .header-popup {
     background-color: white;
     z-index: 200;
@@ -337,211 +354,31 @@ import navItems from '../data/navItems.json'
             display: flex;
             height: 82px;
 
-            &__logo-section {
-                display: flex;
-                align-items: center;
-                padding-right: 30px;
-                &__link {
-                display: block;
-                padding: 5px;
-
-                    &__img {
-                        display: block;
-                        height: 60px;
-                        width: 60px;
-                    }
-                }
-                &__divider {
-                    margin: 0px 15px;
-                    border-left: 2px solid rgb(255, 255, 255);
-                    height: 27px;
-                }
-                &__logo2-link {
-                    display: block;
-                    &__img {
-                    display: block;
-                    aspect-ratio: 1567/302;
-                    max-height: 24px;
-                    }
-                }
-
-            }
 
             &__main-menu-section {
               flex-grow: 1;
               display: flex;
               align-items: center;
 
-              &__search-section {
-                max-width: 380px;
-                width: 100%;
-                margin: 0 auto;
-
-                &__input-tag-wrapper {
-
-                  display: flex;
-                  align-items: center;
-                  position: relative;
-
-                &__input-tag {
-                    display: block;
-                    height: 38px;
-                    padding: 5px 6px;
-                    width: 100%;
-                    border-radius: 20px;
-                    outline: none;
-                    border: 0;
-                    background-color: rgba(255, 255, 255, 0.2);
-                    position: relative;
-                    min-width: 36px;
-                    color: white;
-                    text-align: center;
-                    line-height: 18.4px;
-                    font-size: 16px;
-                    
-                }
-
-                &__input-tag::placeholder {
-                  color: white;
-                  transition: opacity 0.4s ease;
-                }
-
-                &__logo {
-                        position: absolute;
-                        display: block;
-                        height: 38px;
-                        top: 0;
-                        right: 8px;
-                        width: 24px;
-                    }
-              }
-              }
-
-              &__lang-select-section {
-                padding-top: 10px;
-
-                &__btn {
-                 
-                  line-height: 18.4px;
-
-                  &__icons {
-                    display: flex;
-                    align-items: center;
-                    color: white;
-                    font-size: 16px;
-                    line-height: 16.1px;
-
-                    &__icon {
-                      &--globe {
-                        padding-left: 10px;
-                        line-height: 16.1px;
-
-                      }
-
-                      &--down-arrow {
-                        width: 22px;
-                        height: 17px;
-                        display: block;
-                        
-                      }
-                    }
-
-                    &__text {
-                      
-                      &--temp {
-                        border-left: 1px solid white;
-                      }
-                      &--country,
-                      &--temp
-                      {
-                        display: block;
-                        padding: 0px 10px;
-                        line-height: 18.4px;
-                        text-align: center;
-                        height: fit-content;
-                      }
-                    }
-                  }
-                }
-              }
-
-              &__options-toggle-section {
-                &__btn {
-                  margin: 0px 11px 0px 25px;
-                  padding: 1px 6px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  gap: 5px;
-                  height: 30px;
-                  width: 30px;
-
-                  &__line {
-                    background-color: white;
-                    height: 3px;
-                    width: 30px;
-                    border-radius: 2px;
-                  }
-                }
-              }
             }
 
            }
       }
 
       &__expandable-temperature-menu {
-        width: 100vw;
+        width: 100%;
         box-shadow: 3px 3px 20px rgba(0, 0, 0,0.2);
         position: absolute;
 
         &__content {
           max-width: 1280px;
+          box-sizing: content-box;
           margin: 0 auto;
-          padding: 10px 0px;
+          padding: 10px 15px;
           background-color: white;
-
-          &__temp-details {
-            margin: 0 30px 14px;
-            padding: 5px 30px 0px 0px;
-
-            &__temp-options {
-              display: flex;
-              align-items: center;
-              cursor: pointer;
-
-              &__list {
-                display: flex;
-                list-style: none;
-                border: 1px solid #dee0e3;
-                padding: 0px;
-                border-radius: 27px;
-                width: fit-content;
-                margin: 0;
-
-                &__line {
-                  padding: 3px 18px;
-                  font-size: 14px;
-                  line-height: 21px;
-                  border-radius: 27px;
-                }
-
-              
-              }
-
-              &__temp-indicator {
-              font-size: 13px;
-              padding-left: 10px;
-              padding-top: 5px;
-              color: rgb(111, 117, 133);
-              }
-            }
-
-          }
 
           &__country-list {
             &__item {
-
-              border-radius: 6px;
              
               &__header {
               padding: 10px 31px;
@@ -551,12 +388,17 @@ import navItems from '../data/navItems.json'
               position: relative;
               line-height: 27px;
               cursor: pointer;
+              border-radius: 2px;
 
               &__title {
                 font-size: 18px;
                 font-weight: 700;
                 text-transform: uppercase;
                 line-height: 27px;
+              }
+
+              &__title:hover {
+                color:#1b4de4 ;
               }
 
               &__icon {
@@ -636,7 +478,7 @@ import navItems from '../data/navItems.json'
       }
 
       &__city-weather-indicator {
-        width: 100vw;
+        width: 100%;
         background-color: #33789e;
         color: white;
 
@@ -678,6 +520,7 @@ import navItems from '../data/navItems.json'
         &__content {
           display: flex;
           align-items: center;
+
           &__nav {
             display: flex;
             justify-content: space-around;
@@ -731,7 +574,201 @@ import navItems from '../data/navItems.json'
              }
             }
 
-            &__popup {
+          }
+        }
+      }
+  }
+
+  .header-top-options-toggle-section {
+      &__btn {
+        margin: 0px 11px 0px 25px;
+        padding: 1px 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        height: 30px;
+        width: 30px;
+
+        &__line {
+          background-color: white;
+          height: 3px;
+          width: 30px;
+          border-radius: 2px;
+        }
+      }
+    }
+
+  .header-logo-section {
+        display: flex;
+        align-items: center;
+        padding-right: 30px;
+        &__link {
+        display: block;
+        padding: 5px;
+
+            &__img {
+                display: block;
+                height: 60px;
+                width: 60px;
+            }
+        }
+        &__divider {
+            margin: 0px 15px;
+            border-left: 2px solid rgb(255, 255, 255);
+            height: 27px;
+        }
+        &__logo2-link {
+            display: block;
+            &__img {
+            display: block;
+            aspect-ratio: 1567/302;
+            max-height: 24px;
+            }
+        }
+
+   }
+
+   .header-popup-temp-details {
+      margin: 0 30px 14px;
+      padding: 5px 30px 0px 0px;
+
+      &__temp-options {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        flex-wrap: wrap;
+
+        &__list {
+          display: flex;
+          list-style: none;
+          border: 1px solid #dee0e3;
+          padding: 0px;
+          border-radius: 27px;
+          width: fit-content;
+          margin: 0;
+
+          &__line {
+            padding: 3px 18px;
+            font-size: 14px;
+            line-height: 21px;
+            border-radius: 27px;
+          }
+
+        
+        }
+
+        &__temp-indicator {
+        font-size: 13px;
+        padding-left: 10px;
+        padding-top: 5px;
+        color: rgb(111, 117, 133);
+        }
+      }
+
+          }
+
+
+  .header-search-section {
+      max-width: 380px;
+      width: 100%;
+      margin: 0 auto;
+
+      &__input-tag-wrapper {
+
+        display: flex;
+        align-items: center;
+        position: relative;
+
+      &__input-tag {
+          display: block;
+          height: 38px;
+          padding: 5px 6px;
+          width: 100%;
+          border-radius: 20px;
+          outline: none;
+          border: 0;
+          background-color: rgba(255, 255, 255, 0.2);
+          position: relative;
+          min-width: 36px;
+          color: white;
+          text-align: center;
+          line-height: 18.4px;
+          font-size: 16px;
+          
+      }
+
+      &__input-tag::placeholder {
+        color: white;
+        transition: opacity 0.4s ease;
+        text-overflow: ellipsis;
+
+      }
+
+      &__input-tag:placeholder-shown {
+          text-overflow: ellipsis;
+      }
+
+      &__logo {
+              position: absolute;
+              display: block;
+              height: 38px;
+              top: 0;
+              right: 8px;
+              width: 24px;
+          }
+    }
+    }
+
+    .header-lang-select-section {
+      padding-top: 10px;
+      margin-left: 16px;
+      &__button {
+        
+        line-height: 18.4px;
+
+        &__icons {
+          display: flex;
+          align-items: center;
+          color: white;
+          font-size: 16px;
+          line-height: 16.1px;
+
+          &__icon {
+            &--globe {
+              padding-left: 10px;
+              line-height: 16.1px;
+
+            }
+
+            &--down-arrow {
+              width: 22px;
+              height: 17px;
+              display: block;
+              
+            }
+          }
+
+          &__text {
+            
+            &--temp {
+              border-left: 1px solid white;
+            }
+            &--country,
+            &--temp
+            {
+              display: block;
+              padding: 0px 10px;
+              line-height: 18.4px;
+              text-align: center;
+              height: fit-content;
+            }
+          }
+        }
+      }
+    }
+
+    .header-more-forecasts-popup {
               position: absolute;
               top: 40px;
               right:0px;
@@ -762,10 +799,69 @@ import navItems from '../data/navItems.json'
                   }
                 }
               }
-            }
-          }
+     }
+
+  //media query
+  @media screen and (max-width:850px){
+    .header-search-section { 
+      &__input-tag-wrapper {
+        &__input-tag { 
+         padding-right: 30px;  
         }
       }
+    }
+  }
+
+  @media screen and (max-width:790px) {
+    .header__main-nav-wrapper__content__more-forecasts-options {
+      padding-right: 20px;
+    }
+  }
+
+  @media screen and (max-width:600px){
+    .header__main-nav-wrapper__content__nav__link:nth-last-child(1) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width:525px){
+    .header__main-nav-wrapper__content__nav__link:nth-last-child(2) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width:500px){
+   
+   .header__top-section__content {
+    flex-direction: column;
+    height: fit-content;
+    gap: 15px;
+   }
+
+   .header__city-weather-indicator__content__card {
+    margin: 0;
+   }
+   .header__main-nav-wrapper__content__more-forecasts-options {
+      padding-left: 0px;
+      padding-right: 10px;
+      margin: 0px;
+    }
+
+    .header__main-nav-wrapper__content__nav__link {
+      padding: 0px;
+    }
+  }
+
+  @media screen and (max-width:425px) {
+     .header-popup-temp-details {
+      margin: 0px 10px 14px 10px;
+
+      &__temp-options {
+        &__temp-indicator {
+          padding-left: 0px;
+        }
+      }
+     }
   }
 
 </style>
