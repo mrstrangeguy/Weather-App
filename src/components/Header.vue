@@ -30,13 +30,9 @@
                   </button>
                 </div>
                 <div class="header__top-section__content__main-menu-section__options-toggle-section">
-                  <button v-if="!isExpandableTopicsMenuVisible" class="header-btn header__top-section__content__main-menu-section__options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
-                   <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
-                   <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
-                   <div class="header__top-section__content__main-menu-section__options-toggle-section__btn__line"></div>
+                  <button  class="header-btn header__top-section__content__main-menu-section__options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
+                  <span :class="`hamburger-icon ${isExpandableTopicsMenuVisible && 'close-icon'}`"></span>                  
                   </button>
-
-                  <button v-else class="close-icon"></button>
                 </div>
               </div>
             </div>
@@ -56,7 +52,7 @@
 
               </div>
               <div class="header__expandable-temperature-menu__content__country-list">
-                   <div v-for="(elem,index) in headerCountryData" :key="index" class="header__expandable-temperature-menu__content__country-list__item" @click.stop="setCurrentSelectId(elem.id)">
+                   <div v-for="(elem,index) in headerCountryData" :key="index" class="header__expandable-temperature-menu__content__country-list__item outline--black" @click.stop="setCurrentSelectId(elem.id)">
                     <div :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'}`">
                      <div class="header__expandable-temperature-menu__content__country-list__item__header__title">{{ elem.region }}</div>
                      <img class="header__expandable-temperature-menu__content__country-list__item__header__icon" src="../images/arrow-down-blue.svg" alt="">
@@ -101,11 +97,22 @@
             </a>
         
            </nav>
-           <div class="header__main-nav-wrapper__content__more-forecasts-options">
-            <button class="header-btn  header__main-nav-wrapper__content__more-forecasts-options__btn">
+           <div :class="`header__main-nav-wrapper__content__more-forecasts-options ${isMoreForecastsOptionVisible && 'temp-options-btn-outline'}`">
+            <button class="header-btn  header__main-nav-wrapper__content__more-forecasts-options__btn" @click.stop="isMoreForecastsOptionVisible = !isMoreForecastsOptionVisible">
               <span class="header__main-nav-wrapper__content__more-forecasts-options__btn__text">{{ forecastText }}</span>
               <img class="header__main-nav-wrapper__content__more-forecasts-options__btn__icon" src="../images/arrow-down.svg" alt="">
             </button>
+            <div v-if="isMoreForecastsOptionVisible" :class="`header__main-nav-wrapper__content__more-forecasts-options__popup`">
+             <h3 class="header__main-nav-wrapper__content__more-forecasts-options__popup__heading">Special Forecasts</h3>
+             <div class="header__main-nav-wrapper__content__more-forecasts-options__popup__description">
+              <a class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link" >
+                <span class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link__text">Allergy Tracker</span>
+              </a>
+              <a class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link" >
+                <span class="header__main-nav-wrapper__content__more-forecasts-options__popup__description__link__text">Air Quality Forecast</span>
+              </a>
+             </div>
+            </div>
            </div>
           </div>
         </div>
@@ -134,6 +141,7 @@ import navItems from '../data/navItems.json'
   const forecastText = ref<string>('More Forecasts');
   const currentWeatherDetails = ref<{temp:string,city:string,state:string}>({ temp:'31°',city:'Chennai',state:'Tamil Nadu' });
   const isInputFocused = ref<boolean>(false);
+  const isMoreForecastsOptionVisible = ref<boolean>(false)
 ;
   //onMounted
   onMounted(() => {
@@ -189,6 +197,10 @@ import navItems from '../data/navItems.json'
 
 <style lang="scss" scoped>
 
+   .outline--black {
+    outline: 2px solid rgb(43, 43, 43);
+   }
+
    .focused-input::placeholder {
      transition: opacity 0.4s ease;
      opacity: 0;
@@ -201,31 +213,31 @@ import navItems from '../data/navItems.json'
 
   .rotate-icon {
     transform: rotate(180deg);
+    margin-top: -5px;
   }
 
    .header-logo {
     cursor: pointer;
    }
 
-   .close-icon {
+   .hamburger-icon {
     display: block;
-    padding: 1px 6px;
-    margin: 5px 11px 5px 35px;
     position: relative;
-    height: 30px;
     width: 30px;
     border: 0;
-    background-color: transparent;
+    height: 3px;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
-   }
+    border-radius: 2px;
 
-   .close-icon::before {
+   }
+   
+   .hamburger-icon::before {
       display: block;
       position: absolute;
       content: '';
       transform: 50% 50%;
       background: #fff;
-      transform: rotate(45deg);
       width: 30px;
       max-width: 30px;
       // border: 2px solid #fff;
@@ -234,17 +246,18 @@ import navItems from '../data/navItems.json'
       border-radius: 2px;
       height: 3px;
       line-height: 18.4px;
-      bottom: 50%;
-      left: 0;
+      bottom: -8px;
+      // left: -1px;
+     transition: all 0.3s ease;
+     
    }
 
-   .close-icon::after {
+   .hamburger-icon::after {
     display: block;
       position: absolute;
       content: '';
       transform: 50% 50%;
       background: #fff;
-      transform: rotate(-45deg);
       width: 30px;
       max-width: 30px;
       // border: 2px solid #fff;
@@ -254,8 +267,36 @@ import navItems from '../data/navItems.json'
       height: 3px;
       line-height: 18.4px;
       bottom: 50%;
-      left: 0;
+      // left: -1px;
+      top: -8px;
+     transition: all 0.3s ease;
+
+
    }
+
+   .close-icon {
+     transition: all 0.3s ease;
+     background:transparent;
+   }
+
+   .close-icon::before {
+      transform: rotate(45deg);
+      top: 0;
+      transition: all 0.3s ease;
+   }
+
+   .close-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+    transition: all 0.3s ease;
+   }
+  //  .hamburger-icon::after {
+  //     transform: rotate(0deg);
+  //  }
+
+  //  .hamburger-icon::before {
+  //     transform: rotate(0deg);
+  //  }
 
    .header-popup {
     background-color: white;
@@ -426,11 +467,14 @@ import navItems from '../data/navItems.json'
 
               &__options-toggle-section {
                 &__btn {
-                  margin: 1px 11px 0px 25px;
+                  margin: 0px 11px 0px 25px;
                   padding: 1px 6px;
                   display: flex;
                   flex-direction: column;
+                  justify-content: center;
                   gap: 5px;
+                  height: 30px;
+                  width: 30px;
 
                   &__line {
                     background-color: white;
@@ -496,6 +540,8 @@ import navItems from '../data/navItems.json'
 
           &__country-list {
             &__item {
+
+              border-radius: 6px;
              
               &__header {
               padding: 10px 31px;
@@ -604,6 +650,7 @@ import navItems from '../data/navItems.json'
               display: flex;
               padding: 3px 5px 3px 0px;
               align-items: center;
+              cursor: pointer;
 
               &__img {
               width: 18px;
@@ -659,10 +706,16 @@ import navItems from '../data/navItems.json'
 
           &__more-forecasts-options {
             padding: 0px 65px 0px 20px;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+
             &__btn {
              display: flex;
              align-items: center;
              color: white;
+             height: 100%;
 
              &__text {
               color: white;
@@ -672,10 +725,43 @@ import navItems from '../data/navItems.json'
 
              &__icon {
               width: 22px;
-              height: 22px;
+              height: 17px;
               display: block;
-              padding-left: 5px;
+              margin-left: 5px;
              }
+            }
+
+            &__popup {
+              position: absolute;
+              top: 40px;
+              right:0px;
+              width: 350px;
+              background-color: white;
+              box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 12px 0px;
+              padding: 10px 15px;
+              border-radius: 6px;
+
+              &__heading {
+                margin: 0;
+                padding: 6px 15px 8px 15px;
+                color: black;
+                text-transform: uppercase;
+              }
+
+              &__description {
+                display: flex;
+                color: black;
+
+                &__link {
+                  font-size: 1rem;
+                  flex: 1 0 160px;
+
+                  &__text {
+                    display: block;
+                    padding: 5px 15px;
+                  }
+                }
+              }
             }
           }
         }
