@@ -1,0 +1,47 @@
+[
+  {
+    "title":"Don't Miss",
+    "buttontext":"See More",
+    "cards":[
+        {
+            "img":"https://s.w-x.co/in-pollution%20sun.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"India Ranked Among Lowest for Air Quality and Biodiversity in 2024 EPI Report"
+        },
+        {
+            "img":"https://s.w-x.co/in-water_student_drinking.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"Water Crisis Looms in Mumbai: BMC Implements 5% Reduction, Doubling to 10% from June 5"
+        },
+        {
+            "img":"https://s.w-x.co/in-ISS_1.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"Sunita William's Space Mission Jinxed?"
+        },
+        {
+            "img":"https://s.w-x.co/in-zebrafish.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"Zebrafish ‘Aquanauts’ Are Thriving on China’s Tiangong Space Station!"
+        }
+    ]
+  },
+  {
+    "title":"Top Video",
+    "buttontext":"Read More",
+    "cards":[
+        {
+            "img":"https://v.w-x.co/1720066220156_India_2_Day_TOMORROW_Wed_03_2024_23_15_19xMproxy_50a66dba-6579-40cc-87c6-0e187b145a8d.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"WATCH: Latest India Weather Forecast: July 4"
+        },
+        {
+            "img":"https://v.w-x.co/1709275033751_TWC_MARLIN_HOR_1026afe3-4e0e-4e0f-857a-2049215d1ca9.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"WATCH: When Hunting In Groups, Marlins Change Colours to Coordinate Attacks!"
+        },
+        {
+            "img":"https://v.w-x.co/1705140218368_covidmezz_HighRes_avc_mpeg4_6000kbps_(2)_674dc4d1-8bfe-4f22-ae30-df5c146571ac.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"WHO Reports Nearly 10,000 COVID-19 Deaths Worldwide and 42% Surge in Hospital Admissions"
+        },
+        {
+            "img":"https://v.w-x.co/1702544035629_v3_NOAA_1mezz_HighRes_avc_mpeg4_6000kbps_451e5907-9227-4d7d-901d-cb9641506c6e.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "description":"Arctic Report Card Highlights Unprecedented Warmth, Melting, and Declining Sea Ice"
+        }
+    ]
+  }
+    
+]

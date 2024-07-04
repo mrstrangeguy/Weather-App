@@ -1,0 +1,52 @@
+{
+    "mainCard1":{
+    "title":"Top Stories",
+    "mainContentDetails":{
+       "img":"https://s.w-x.co/in-kaziranga_flood_inundation.gif?crop=16:9&width=320",
+       "heading":"Heavy Rains to Hit Northeast India This Week; Over 6 Lakh Affected in Assam, Kaziranga Flooded",
+       "description":"The rising water levels of the Brahmaputra River have threatened wildlife in Kaziranga National Park and Tiger Reserve, with over 26% of its 233 forest camps underwater. "
+    },
+    "sideBarContentDetails":[
+        {
+            "img":"https://s.w-x.co/in-july2.png?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"Himachal, Punjab, Delhi, UP, Rajasthan in for Heavy Rains This Week; Uttarakhand on Red Alert!"
+        },
+        {
+            "img":"https://s.w-x.co/in-mosquito_5.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"Pune Confirms Six Cases of Zika Virus! How Dangerous Is It?"
+        },
+        {
+            "img":"https://s.w-x.co/in-monsoon_imd_1.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"After Below-Normal Rains in June, July Rainfall to Exceed 106% of Long-Term Average"
+        }
+        
+    ],
+    "buttontext":"See More"
+   },
+   "mainCard2":{
+    "title":"Weather Across India",
+    "mainContentDetails":{
+       "img":"https://s.w-x.co/in-Thursday%20Aug%2010.jpg?crop=16:9&width=800&format=pjpg&auto=webp&quality=60",
+       "heading":"Weather Today (July 4): Heavy Rains to Soak Himachal, Delhi, Uttar Pradesh, Madhya Pradesh, Rajasthan",
+       "description":""
+    },
+    "sideBarContentDetails":[
+        {
+            "img":"https://s.w-x.co/in-andhra%20rain.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"Could Approaching La Niña Bring Above-Normal Rains to India in the Latter Half of Monsoon?"
+        },
+        {
+            "img":"https://s.w-x.co/in-Sikkim_rescue_0.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"Sikkim Floods: Extremely Heavy Rains Hamper Rescue Operations as Over 2,000 Tourists Remain Stranded"
+        },
+        {
+            "img":"https://s.w-x.co/in-monsoon_clouds_0.jpg?crop=16:9&width=480&format=pjpg&auto=webp&quality=60",
+            "details":"India in for More Intense Than Usual Monsoon Rains Due to Favourable La Niña: IMD"
+        }
+        
+    ],
+    "buttontext":"Read More"
+   }
+
+   
+}
