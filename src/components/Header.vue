@@ -19,13 +19,13 @@
                   </div>
                 </div>
                 <div class="header-lang-select-section">
-                  <button :class="`header-lang-select-section__button header-btn ${isExpandableMenuVisible && 'temp-options-btn-outline'}`" @click.stop="onToggleTemperatureMenu()">
+                  <button :class="{ 'temp-options-btn-outline':isExpandableMenuVisible,'header-lang-select-section__button':true,'header-btn':true }" @click.stop="onToggleTemperatureMenu()">
                     <div class="header-lang-select-section__button__icons">
                     <img src="../images/globe-icon.svg" alt="globe-icon" class="header-lang-select-section__button__icons--globe">
                     <span class="header-lang-select-section__button__icons__text--country">{{ country }}</span>
                     <span class="header-lang-select-section__button__icons__text--temp">{{ getCurrentTempIndicator }}</span>
-                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="`${isExpandableMenuVisible && 'rotate-icon'} header-lang-select-section__button__icons--down-arrow`">
-                    
+                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="{ 'rotate-icon':isExpandableMenuVisible,'header-lang-select-section__button__icons--down-arrow':false }">
+                    <!--{ 'rotate-icon':isExpandableMenuVisible,'header-lang-select-section__button__icons--down-arrow':true }--->
                     </div>
                   </button>
                 </div>
@@ -43,9 +43,9 @@
               <div class="header-popup-temp-details">
                  <div class="header-popup-temp-details__temp-options">
                   <ul class="header-popup-temp-details__temp-options__list">
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°F') }`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°C') }`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('Hybrid') }`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°F') }`" @click.stop="onTempScaleChange('°F')">°F</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°C') }`" @click.stop="onTempScaleChange('°C')">°C</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('Hybrid') }`" @click.stop="onTempScaleChange('Hybrid')">Hybrid</li>
                   </ul>
                   <div class="header-popup-temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
                  </div>
@@ -211,7 +211,8 @@ import navItems from '../data/navItems.json'
   const getTempOptionStyle = (tempUnit:string) => currentTempScale.value === tempUnit ? 'selected-temp' : 'temp';
 
   const onTempScaleChange = (tempUnit:string) => {
-    currentTempScale.value = ''
+    currentTempScale.value = tempUnit;
+    closeAllPopup();
   }
      
   const onResponsive = () => {
