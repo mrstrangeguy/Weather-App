@@ -2,7 +2,7 @@
     "connnectData": {
         "title": "Connect with us",
         "icons": [
-            "./src/images/footer-images/facebook.svg",
+            "./src/images/footer-images/Facebook.svg",
             "./src/images/footer-images/Twitter.svg",
             "./src/images/footer-images/Instagram.svg",
             "./src/images/footer-images/Youtube.svg"

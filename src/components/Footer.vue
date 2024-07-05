@@ -13,7 +13,7 @@
             >
               <a class="social-icon-wrapper__link">
                 <img
-                  class="social-icon-wrapper__link__icon"
+                  class="social-icon-wrapper__link__icon social-link-img"
                   :src="elem"
                   alt="social-media-icon"
                 />
@@ -37,7 +37,7 @@
           v-for="elem in data?.corporateLinks"
         >
           <a
-            class="footer-corporate-links__link-wrapper__link footer-list-link"
+            class="footer-corporate-links__link-wrapper__link footer-list-link footer-link"
             >{{ elem }}</a
           >
         </li>
@@ -48,7 +48,7 @@
           class="footer-legal-links__link-wrapper"
           v-for="elem in data?.legalLinks"
         >
-          <a class="footer-legal-links__link-wrapper__link footer-list-link">{{
+          <a class="footer-legal-links__link-wrapper__link footer-list-link footer-link">{{
             elem
           }}</a>
         </li>
@@ -70,7 +70,7 @@
             class="footer-privacy-container-list__link-wrapper"
             v-for="elem in data?.privacyLinks"
           >
-            <a class="footer-privacy-container-list__link-wrapper__link">{{
+            <a class="footer-privacy-container-list__link-wrapper__link footer-link">{{
               elem
             }}</a>
           </li>
@@ -101,6 +101,14 @@ onMounted(() => {
   background-color: white;
 }
 
+.footer-link {
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  color: #1b4de4;
+}
+
 .footer-list {
   margin: 0;
   padding: 0;
@@ -111,6 +119,7 @@ onMounted(() => {
   max-width: 1138px;
   margin: 0 auto;
   padding: 30px;
+  box-sizing: content-box;
 
   &__social-logs {
     display: flex;
@@ -118,9 +127,21 @@ onMounted(() => {
   }
 }
 
+.footer-connect-section {
+  &__text {
+    font-weight: 700;
+    line-height: 27px;
+    font-size: 18px;
+  }
+}
+
 .elements-in-middle {
   display: flex;
   align-items: center;
+}
+
+.social-link:hover {
+  background-color: #1b4de4;
 }
 
 .footer-social-icons {
@@ -137,13 +158,25 @@ onMounted(() => {
       border-radius: 100vw;
       background-color: #cfdaf9;
       margin-left: 10px;
+      cursor: pointer;
 
       &__icon {
         width: 24px;
         height: 24px;
         display: block;
+        fill: white;
       }
+
+      &:hover {
+        background-color: #1b4de4;
+
+        .social-link-img {
+          filter: brightness(0%) invert(1);
+        }
+      }
+
     }
+
   }
 }
 
@@ -153,6 +186,7 @@ onMounted(() => {
     width: 50px;
     display: inline-block;
     margin-left: 10px;
+    cursor: pointer;
   }
 
   &__icon:nth-child(1) {
@@ -206,6 +240,7 @@ onMounted(() => {
 
   &__link {
     display: block;
+    cursor: pointer;
   }
 
   &__link:nth-child(1) {
@@ -265,6 +300,43 @@ onMounted(() => {
   .footer-connect-section {
     flex-direction: column;
     gap: 12px;
+
+    &__text {
+      width: 100%;
+      display: block;
+    }
   }
+
+  .footer-social-icons  {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+
+    .social-icon-wrapper { 
+      &__link {
+       margin-left: 0;
+      }
+    }
+
+  }
+
+  .footer-company-icons {
+    justify-content: flex-start;
+
+  }
+
+  .footer-corporate-links {
+    gap: 10px;
+  }
+
+  .footer-corporate-links {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .footer-list-link {
+    padding: 0;
+  }
+ 
 }
 </style>
