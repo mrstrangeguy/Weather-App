@@ -43,9 +43,9 @@
               <div class="header-popup-temp-details">
                  <div class="header-popup-temp-details__temp-options">
                   <ul class="header-popup-temp-details__temp-options__list">
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === '°F' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === '°C' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${currentTempScale === 'Hybrid' ? 'selected-temp' : 'temp'}`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°F') }`" @click.stop="currentTempScale = '°F',closeAllPopup()">°F</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°C') }`" @click.stop="currentTempScale = '°C',closeAllPopup()">°C</li>
+                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('Hybrid') }`" @click.stop="currentTempScale = 'Hybrid',closeAllPopup()">Hybrid</li>
                   </ul>
                   <div class="header-popup-temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
                  </div>
@@ -208,6 +208,12 @@ import navItems from '../data/navItems.json'
     isInputFocused.value = false;
   }
 
+  const getTempOptionStyle = (tempUnit:string) => currentTempScale.value === tempUnit ? 'selected-temp' : 'temp';
+
+  const onTempScaleChange = (tempUnit:string) => {
+    currentTempScale.value = ''
+  }
+     
   const onResponsive = () => {
 
       if(window.innerWidth > 790) {
