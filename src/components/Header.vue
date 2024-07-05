@@ -13,9 +13,9 @@
               </div>
               <div class="header__top-section__content__main-menu-section">
                 <div class="header-search-section">
-                    <div class="header-search-section__input-tag-wrapper">
-                    <input :class="`header-search-section__input-tag-wrapper__input-tag ${isInputFocused && 'focused-input'}`" :placeholder="searchPlaceholder" ref="inputRef" @focus="isInputFocused = true" @focusout="isInputFocused = false" type="text">
-                    <img class="header-search-section__input-tag-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
+                    <div class="header-input-wrapper">
+                    <input :class="{'focused-input':isInputFocused,'header-input-wrapper__input':true}" :placeholder="searchPlaceholder" ref="inputRef" @focus="onFocus" @focusout="onFocusOut" type="text">
+                    <img class="header-input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
                   </div>
                 </div>
                 <div class="header-lang-select-section">
@@ -198,6 +198,14 @@ import navItems from '../data/navItems.json'
     isExpandableMenuVisible.value = false;
     isExpandableTopicsMenuVisible.value = false;
     isMoreForecastsOptionVisible.value = false;
+  }
+
+  const onFocus = () => {
+    isInputFocused.value = true;
+  }
+
+  const onFocusOut = () => {
+    isInputFocused.value = false;
   }
 
   const onResponsive = () => {
@@ -674,13 +682,13 @@ import navItems from '../data/navItems.json'
       width: 100%;
       margin: 0 auto;
 
-      &__input-tag-wrapper {
+      .header-input-wrapper {
 
         display: flex;
         align-items: center;
         position: relative;
 
-      &__input-tag {
+      &__input {
           display: block;
           height: 38px;
           padding: 5px 6px;
@@ -698,14 +706,14 @@ import navItems from '../data/navItems.json'
           
       }
 
-      &__input-tag::placeholder {
+      &__input::placeholder {
         color: white;
         transition: opacity 0.4s ease;
         text-overflow: ellipsis;
 
       }
 
-      &__input-tag:placeholder-shown {
+      &__input:placeholder-shown {
           text-overflow: ellipsis;
       }
 
