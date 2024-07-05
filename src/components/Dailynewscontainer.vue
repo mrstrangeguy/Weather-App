@@ -31,12 +31,12 @@
     <!--Main Section Advertisements-->
     <Advertisementcard class="main-content-element main-section-ad-row1-1">
         <template v-slot:['advertisement-image']>
-        <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" class="main-section-ad-row1-image" alt="">
+        <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" class="main-section-ad-row1-image advertisement-img" alt="advertisement-image">
         </template>
     </Advertisementcard>
     <Advertisementcard class="main-content-element main-section-ad-row1-2">
         <template v-slot:['advertisement-image']>
-        <img src="https://tpc.googlesyndication.com/simgad/8755113534239921333" class="main-section-ad-row1-image" alt="">
+        <img src="https://tpc.googlesyndication.com/simgad/8755113534239921333" class="main-section-ad-row1-image advertisement-img" alt="advertisement-image">
         </template>
     </Advertisementcard>
 
@@ -52,7 +52,7 @@
     <Advertisementcard class="main-content-element main-section-ad-row2">
         <template v-slot:['advertisement-image']>
         <div class="main-section-ad-row2-image-wrapper">
-        <img src="https://tpc.googlesyndication.com/simgad/8419533411674054302" class="main-section-ad-row2-image-wrapper__image" alt="">
+        <img src="https://tpc.googlesyndication.com/simgad/8419533411674054302" class="main-section-ad-row2-image-wrapper__image advertisement-img" alt="advertisement-image">
         </div>
         </template>
     </Advertisementcard>
@@ -63,7 +63,7 @@
 
     <Advertisementcard >
     <template v-slot:['advertisement-image']>
-    <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" alt="" class="advertisement-image">
+    <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" alt="advertisement-image" class="advertisement-image advertisement-img">
     </template>
     </Advertisementcard>
 
@@ -81,23 +81,30 @@
     
 
     <template v-slot:['advertisement-image']>
-    <img  src="https://s.w-x.co/promo-modules-units-features.png?crop=2.85:1&width=320&format=pjpg&auto=webp&quality=60" alt="" class="advertisement-image features-ad-image">
+    <img  src="https://s.w-x.co/promo-modules-units-features.png?crop=2.85:1&width=320&format=pjpg&auto=webp&quality=60" alt="advertisement-image" class="advertisement-image features-ad-image advertisement-img">
     </template>
     </Advertisementcard>
 
     <Advertisementcard >
     <template v-slot:['advertisement-image']>
-    <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" alt="" class="advertisement-image">
+    <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" alt="advertisement-image" class="advertisement-image advertisement-img">
     </template>
     </Advertisementcard>
 
     <Advertisementcard >
     <template v-slot:['advertisement-image']>
-    <img src="https://tpc.googlesyndication.com/simgad/8755113534239921333" alt="" class="advertisement-image">
+    <img src="https://tpc.googlesyndication.com/simgad/8755113534239921333" alt="advertisement-image" class="advertisement-image advertisement-img">
     </template>
     </Advertisementcard>
     
     </div>
+
+    <Advertisementcard class="main-content-element main-section-final-ad">
+        <template v-slot:['advertisement-image']>
+        <img src="https://tpc.googlesyndication.com/simgad/8419533411674054302" class="main-section-ad-row2-image-wrapper__image advertisement-img" alt="advertisement-image">
+        </template>
+    </Advertisementcard>
+    
     </div>
     
 </template>
@@ -129,7 +136,6 @@ onMounted(() => {
     
     .daily-news-grid {
         max-width:1162px;
-        min-height:500px;
         margin:12px auto;
         display:grid;
         grid-template-columns:minmax(0,1fr) 350px;
@@ -141,15 +147,22 @@ onMounted(() => {
         display: grid;
         grid-template-columns: repeat(12,1fr);
         grid-column-gap: 12px;
+        grid-column: 1/2;
     }
 
     #advertisements-container {
         margin-right: 12px;
+        // grid-column: 2/3;
       
     }
 
     .main-content-element {
         grid-column: 1/13;
+    }
+
+    .advertisement-img {
+        width: 100%;
+        display: block;
     }
 
     .card-content-grid {
@@ -167,10 +180,15 @@ onMounted(() => {
         }
     }
 
+    .card-content-grid::-webkit-scrollbar {
+        display: none;
+    }
+
     .sidebar-cards-row {
         display: flex;
         width: calc(100% + 16px);
         margin-top: 22px;
+        overflow: auto;
 
         &__card-wrapper {
             flex: 1;
@@ -186,11 +204,6 @@ onMounted(() => {
     .main-card-2__side-bar-card {
         width: 147px;
         margin-bottom: 10px;
-    }
-
-    .advertisement-image {
-        display: block;
-        width: 100%;
     }
 
     .trailing-cards-row {
@@ -240,7 +253,68 @@ onMounted(() => {
         &__image {
             display: block;
             margin: 0 auto;
+            max-width: 728px;
+            width: 100%;
         }
+    }
+
+    .main-section-final-ad {
+       grid-column: 1/3;
+       margin-left: 12px;
+       width: 100%;
+    }
+
+    @media screen and (max-width:768px) {
+    .daily-news-grid {
+        grid-template-columns: 1fr;
+        background-color: lightblue;
+    }
+
+    #current-news-container {
+        grid-column: 1/3;
+    }
+
+    #advertisements-container {
+        display: grid;
+        grid-column: 1/4;
+        column-gap: 12px;
+        grid-template-columns: repeat(2,1fr);
+        margin-left: 12px;
+    }
+
+    .features-ad-image {
+        width: 100%;
+    }
+
+    .features-ad-header {
+        &__text {
+            font-size: 16px;
+           
+        }
+    }
+        
+    }
+
+    @media screen and (max-width:500px) { 
+        .trailing-cards-row { 
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            column-gap: 12px;
+        }
+
+        .trailing-card {
+            margin: 0;
+        }
+
+
+        .card-content-grid {
+            grid-template-columns: 1fr;
+
+            &__sidebar-content {
+                margin-left: 0;
+            }
+        }
+
     }
 
     </style>

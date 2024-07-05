@@ -44,6 +44,11 @@ defineProps<{
        font-size: 24px;
        font-weight: 700;
        cursor: pointer;
+       display: -webkit-inline-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp:3;
+      line-clamp: 3;
+      overflow: hidden;
       }
     }
 
