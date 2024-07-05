@@ -1,0 +1,36 @@
+{
+    "connnectData": {
+        "title": "Connect with us",
+        "icons": [
+            "./src/images/footer-images/facebook.svg",
+            "./src/images/footer-images/Twitter.svg",
+            "./src/images/footer-images/Instagram.svg",
+            "./src/images/footer-images/Youtube.svg"
+        ]
+    },
+    "companyIcons": [
+        "./src/images/footer-images/weather-company.svg",
+        "./src/images/footer-images/The Weather Channel-1.svg",
+        "./src/images/footer-images/Weather Underground.svg"
+    ],
+    "corporateLinks": [
+        "Feedback",
+        "Weather API",
+        "News Room"
+    ],
+    "legalLinks": [
+        "Terms of Use",
+        "Privacy Policy",
+        "Accessibility Statement",
+        "Data Vendors"
+    ],
+    "attributionIcons": [
+        "./src/images/footer-images/Georgia.svg",
+        "./src/images/footer-images/essential.svg"
+    ],
+    "privacyPara": "We recognise our responsibility to use data and technology for good. We may use or share your data with our data vendors. Take control of your data.",
+    "privacyLinks": [
+        "Data Rights"
+    ],
+    "copyrightText": "© The Weather Company, LLC 2024"
+}
