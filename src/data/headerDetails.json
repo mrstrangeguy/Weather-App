@@ -1,0 +1,5 @@
+{
+    "currentWeatherDetails":{ "temp":"31°","city":"Chennai","state":"Tamil Nadu" },
+    "country":"IN",
+    "currentTempScale":"°C"
+}
