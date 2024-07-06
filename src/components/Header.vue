@@ -1,61 +1,61 @@
 <template>
     <div class="header" @click="closeAllPopup">
-        <div class="header__top-section" >
-            <div class="header__top-section__content">
-              <div class="header-logo-section">
-                <a class="header-logo-section__link">
-                   <img class="header-logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon">
+        <div class="top-section" >
+            <div class="top-section__content">
+              <div class="logo-section">
+                <a class="logo-section__link">
+                   <img class="logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon">
                 </a>
-                <div class="header-logo-section__divider"></div>
-                <a class="header-logo-section__logo2-link">
-                    <img class="header-logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon">
+                <div class="logo-section__divider"></div>
+                <a class="logo-section__logo2-link">
+                    <img class="logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon">
                 </a>
               </div>
-              <div class="header__top-section__content__main-menu-section">
-                <div class="header-search-section">
-                    <div class="header-input-wrapper">
-                    <input :class="{'focused-input':isInputFocused,'header-input-wrapper__input':true}" :placeholder="searchPlaceholder" ref="inputRef" @focus="onFocus" @focusout="onFocusOut" type="text">
-                    <img class="header-input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
+              <div class="top-section__content__main-menu-section">
+                <div class="search-section">
+                    <div class="input-wrapper">
+                    <input :class="{'focused-input':isInputFocused,'input-wrapper__input':true}" :placeholder="searchPlaceholder" ref="inputRef" @focus="onFocus" @focusout="onFocusOut" type="text">
+                    <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
                   </div>
                 </div>
-                <div class="header-lang-select-section">
-                  <button :class="{ 'temp-options-btn-outline':isExpandableMenuVisible,'header-lang-select-section__button':true,'header-btn':true }" @click.stop="onToggleTemperatureMenu()">
-                    <div class="header-lang-select-section__button__icons">
-                    <img src="../images/globe-icon.svg" alt="globe-icon" class="header-lang-select-section__button__icons--globe">
-                    <span class="header-lang-select-section__button__icons__text--country">{{ country }}</span>
-                    <span class="header-lang-select-section__button__icons__text--temp">{{ getCurrentTempIndicator }}</span>
-                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="{ 'rotate-icon':isExpandableMenuVisible,'header-lang-select-section__button__icons--down-arrow':false }">
-                    <!--{ 'rotate-icon':isExpandableMenuVisible,'header-lang-select-section__button__icons--down-arrow':true }--->
+                <div class="lang-select">
+                  <button :class="{ 'temp-options-btn-outline':isExpandableMenuVisible,'lang-select__button':true,'header-btn':true }" @click.stop="onToggleTemperatureMenu()">
+                    <div class="lang-select__button__icons">
+                    <img src="../images/globe-icon.svg" alt="globe-icon" class="lang-select__button__icons--globe">
+                    <span class="lang-select__button__icons__text--country">{{ country }}</span>
+                    <span class="lang-select__button__icons__text--temp">{{ getCurrentTempIndicator }}</span>
+                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="{ 'rotate-icon':isExpandableMenuVisible,'lang-select__button__icons--down-arrow':true }">
+                    
                     </div>
                   </button>
                 </div>
-                <div class="header-top-options-toggle-section">
-                  <button  class="header-btn header-top-options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
-                  <span :class="`hamburger-icon ${isExpandableTopicsMenuVisible && 'close-icon'}`"></span>                  
+                <div class="options-toggle">
+                  <button  class="header-btn options-toggle__button" @click.stop="onToggleTopicsMenu">
+                  <span :class="{'close-icon':isExpandableTopicsMenuVisible ,'hamburger-icon':true }"></span>                  
                   </button>
                 </div>
               </div>
             </div>
         </div>
         
-        <div v-if="isExpandableMenuVisible" class="header-popup header__expandable-temperature-menu" @click.stop>
-            <div class="header__expandable-temperature-menu__content">
-              <div class="header-popup-temp-details">
-                 <div class="header-popup-temp-details__temp-options">
-                  <ul class="header-popup-temp-details__temp-options__list">
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°F') }`" @click.stop="onTempScaleChange('°F')">°F</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('°C') }`" @click.stop="onTempScaleChange('°C')">°C</li>
-                    <li :class="`header-popup-temp-details__temp-options__list__line ${ getTempOptionStyle('Hybrid') }`" @click.stop="onTempScaleChange('Hybrid')">Hybrid</li>
+        <div v-if="isExpandableMenuVisible" class="header-popup temperature-menu" @click.stop>
+            <div class="temperature-menu__content">
+              <div class="popup-temp">
+                 <div class="popup-temp__options">
+                  <ul class="popup-temp-list">
+                    <li :class="`popup-temp-list__line ${ getTempOptionStyle('°F') }`" @click.stop="onTempScaleChange('°F')">°F</li>
+                    <li :class="`popup-temp-list__line ${ getTempOptionStyle('°C') }`" @click.stop="onTempScaleChange('°C')">°C</li>
+                    <li :class="`popup-temp-list__line ${ getTempOptionStyle('Hybrid') }`" @click.stop="onTempScaleChange('Hybrid')">Hybrid</li>
                   </ul>
-                  <div class="header-popup-temp-details__temp-options__temp-indicator">{{ getUnitDescription }}</div>
+                  <div class="popup-temp-indicator">{{ getUnitDescription }}</div>
                  </div>
 
               </div>
-              <div class="header__expandable-temperature-menu__content__country-list">
-                   <div v-for="(elem,index) in headerCountryData" :key="index" :class="`header__expandable-temperature-menu__content__country-list__item `" @click.stop="setCurrentSelectId(elem.id)">
-                    <div :class="`header__expandable-temperature-menu__content__country-list__item__header ${index === headerCountryData.length-1 && 'disable-border'} ${elem.id === currentCountryId && 'outline--black'}`">
-                     <div class="header__expandable-temperature-menu__content__country-list__item__header__title">{{ elem.region }}</div>
-                     <img :class="`header__expandable-temperature-menu__content__country-list__item__header__icon ${currentCountryId === elem.id && 'rotate-country-list-icon'}`" src="../images/arrow-down-blue.svg" alt="angle-icon">
+              <div class="country-list">
+                   <div v-for="(elem,index) in headerCountryData" :key="index" class="country-list__item" @click.stop="setCurrentSelectId(elem.id)">
+                    <div :class="{ 'country-list__item__header':true, 'disable-border':(index === headerCountryData.length-1),'outline--black':(elem.id === currentCountryId) }">
+                     <div class="country-list__item__header__title">{{ elem.region }}</div>
+                     <img :class="{ 'country-list__item__header__icon':true,'rotate-country-list-icon':(currentCountryId === elem.id) }" src="../images/arrow-down-blue.svg" alt="angle-icon">
                     </div>
                     <CountryList v-if="currentCountryId === elem.id"/>
                     </div>
@@ -63,23 +63,23 @@
             </div>
         </div>
         
-        <div v-if="isExpandableTopicsMenuVisible" class="header-popup header__expandable-topics-menu" @click.stop>
-          <div class="header__expandable-topics-menu__content">
-              <div class="header__expandable-topics-menu__content__navs">
-                <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="header__expandable-topics-menu__content__navs__nav">
-                  <span class="header__expandable-topics-menu__content__navs__nav__heading">{{ elem.title }}</span>
-                  <button v-for="(btnData,index) in elem.details" :key="index" class="header-btn header__expandable-topics-menu__content__navs__nav__btn">{{ btnData }}</button> 
+        <div v-if="isExpandableTopicsMenuVisible" class="header-popup topics-menu" @click.stop>
+          <div class="topics-menu__content">
+              <div class="topics-menu-navs">
+                <nav v-for="(elem) in headerTopicsData" :key="elem.id" class="topics-menu-navs__nav">
+                  <span class="topics-menu-navs__nav__heading">{{ elem.title }}</span>
+                  <button v-for="(btnData,index) in elem.details" :key="index" class="header-btn topics-menu-navs__nav__button">{{ btnData }}</button> 
                 </nav>
               </div>
           </div>
         </div>
 
-        <div class="header__city-weather-indicator">
-            <div class="header-contents-container header__city-weather-indicator__content">
-              <div class="header__city-weather-indicator__content__card">
-                <a class="header__city-weather-indicator__content__card__link">
-                  <img src="../images/Foggy.svg" alt="angle-icon" class="header__city-weather-indicator__content__card__link__img">
-                  <span class="header__city-weather-indicator__content__card__link__text">{{ currentWeatherDetails.temp }}</span>
+        <div class="weather-indicator">
+            <div class="header-contents-container weather-indicator__content">
+              <div class="weather-indicator-card">
+                <a class="weather-indicator-card__link">
+                  <img src="../images/Foggy.svg" alt="angle-icon" class="weather-indicator-card__link__img">
+                  <span class="weather-indicator-card__link__text">{{ currentWeatherDetails.temp }}</span>
                 </a>
 
                 <a class="header__city-weather-indicator__content__card__link">
@@ -89,20 +89,20 @@
             </div>
         </div>
 
-        <div class="header__main-nav-wrapper">
-          <div class="header-contents-container  header__main-nav-wrapper__content">
-           <nav class="header__main-nav-wrapper__content__nav">
-            <a v-for="(item,index) in navData" :key="index" class="header__main-nav-wrapper__content__nav__link">
-              <span class="header__main-nav-wrapper__content__nav__link__text">{{  item  }}</span>
+        <div class="main-nav">
+          <div class="header-contents-container  main-nav__content">
+           <nav class="main-nav__content__nav">
+            <a v-for="(item,index) in navData" :key="index" class="main-nav-link">
+              <span class="main-nav-link__text">{{  item  }}</span>
             </a>
         
            </nav>
-           <div :class="`header__main-nav-wrapper__content__more-forecasts-options ${isMoreForecastsOptionVisible && 'temp-options-btn-outline'}`">
-            <button class="header-btn  header__main-nav-wrapper__content__more-forecasts-options__btn" @click.stop="isMoreForecastsOptionVisible = !isMoreForecastsOptionVisible">
-              <span class="header__main-nav-wrapper__content__more-forecasts-options__btn__text">{{ forecastText }}</span>
-              <img :class="`header__main-nav-wrapper__content__more-forecasts-options__btn__icon ${isMoreForecastsOptionVisible && 'rotate-icon margin-changes'}`" src="../images/arrow-down.svg" alt="angle-icon">
+           <div :class="{ 'temp-options-btn-outline' : isMoreForecastsOptionVisible ,'forecasts-options':true }">
+            <button class="header-btn  forecasts-options__button" @click.stop="onToggleForecastOption">
+              <span class="forecasts-options__button__text">{{ forecastText }}</span>
+              <img :class="{'rotate-icon margin-changes' : isMoreForecastsOptionVisible ,'forecasts-options__button__icon':true }" src="../images/arrow-down.svg" alt="angle-icon">
             </button>
-            <div v-if="isMoreForecastsOptionVisible" :class="`header-more-forecasts-popup`">
+            <div v-if="isMoreForecastsOptionVisible" class="header-more-forecasts-popup">
              <h3 class="header-more-forecasts-popup__heading">Special Forecasts</h3>
              <div class="header-more-forecasts-popup__description">
               <a class="header-more-forecasts-popup__description__link" >
@@ -213,6 +213,10 @@ import navItems from '../data/navItems.json'
   const onTempScaleChange = (tempUnit:string) => {
     currentTempScale.value = tempUnit;
     closeAllPopup();
+  }
+
+  const onToggleForecastOption = () => {
+    isMoreForecastsOptionVisible.value = !isMoreForecastsOptionVisible.value;
   }
      
   const onResponsive = () => {
@@ -360,7 +364,7 @@ import navItems from '../data/navItems.json'
       position: relative;
       z-index: 100;
 
-      &__top-section {
+      .top-section {
         background-color: rgb(0, 89, 134);
            &__content {
             max-width: 1280px;
@@ -380,7 +384,7 @@ import navItems from '../data/navItems.json'
            }
       }
 
-      &__expandable-temperature-menu {
+      .temperature-menu {
         width: 100%;
         box-shadow: 3px 3px 20px rgba(0, 0, 0,0.2);
         position: absolute;
@@ -392,7 +396,7 @@ import navItems from '../data/navItems.json'
           padding: 10px 15px;
           background-color: white;
 
-          &__country-list {
+          .country-list {
             &__item {
              
               &__header {
@@ -441,7 +445,7 @@ import navItems from '../data/navItems.json'
         }
       }
 
-      &__expandable-topics-menu {
+      .topics-menu {
         width: 100vw;
         box-shadow: 3px 3px 20px rgba(0, 0, 0,0.2);
         position: absolute;
@@ -452,7 +456,7 @@ import navItems from '../data/navItems.json'
           padding: 0px 60px;
           margin: 0 auto;
          
-          &__navs {
+          .topics-menu-navs {
             padding: 22px 11px 11px 11px;
             width: 100%;
             display: flex;
@@ -473,7 +477,7 @@ import navItems from '../data/navItems.json'
                 font-weight: 700;
                 line-height: 27px;
               }
-              &__btn {
+              &__button {
                 display: block;
                 text-align: left;
                 width: 100%;
@@ -483,7 +487,7 @@ import navItems from '../data/navItems.json'
                 cursor: pointer;
               }
 
-              &__btn:hover {
+              &__button:hover {
                 color: #1b4de4;
               }
             }
@@ -492,13 +496,36 @@ import navItems from '../data/navItems.json'
          }
       }
 
-      &__city-weather-indicator {
+      .weather-indicator {
         width: 100%;
         background-color: #33789e;
-        color: white;
+        color: white;  
+      }
 
+    
+
+      .main-nav {
+        background-color: #003550;
+        color: white;
         &__content {
-          &__card {
+          display: flex;
+          align-items: center;
+
+          &__nav {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: center;
+            height: 40px;
+            flex-grow: 1;
+
+          }
+
+        }
+      }
+  }
+
+  .weather-indicator-card {
             display: flex;
             padding: 5px 15px;
             margin-left: 60px;
@@ -526,32 +553,15 @@ import navItems from '../data/navItems.json'
 
             }
           }
-        }
-      }
 
-      &__main-nav-wrapper {
-        background-color: #003550;
-        color: white;
-        &__content {
-          display: flex;
-          align-items: center;
-
-          &__nav {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            align-items: center;
-            height: 40px;
-            flex-grow: 1;
-
-            &__link {
+  .main-nav-link {
               padding: 0px 15px;
               display: block;
               cursor: pointer;
               position: relative;
             }
 
-            &__link:hover::after {
+            .main-nav-link:hover::after {
               position: absolute;
               content: '';
               width: 100%;
@@ -560,16 +570,15 @@ import navItems from '../data/navItems.json'
               bottom: -8px;
               left: 0;
             }
-          }
 
-          &__more-forecasts-options {
+  .forecasts-options {
             padding: 0px 65px 0px 20px;
             position: relative;
             height: 40px;
             display: flex;
             align-items: center;
 
-            &__btn {
+            &__button {
              display: flex;
              align-items: center;
              color: white;
@@ -590,12 +599,9 @@ import navItems from '../data/navItems.json'
             }
 
           }
-        }
-      }
-  }
 
-  .header-top-options-toggle-section {
-      &__btn {
+  .options-toggle {
+      &__button {
         margin: 0px 11px 0px 25px;
         padding: 1px 6px;
         display: flex;
@@ -614,10 +620,11 @@ import navItems from '../data/navItems.json'
       }
     }
 
-  .header-logo-section {
+  .logo-section {
         display: flex;
         align-items: center;
         padding-right: 30px;
+
         &__link {
         display: block;
         padding: 5px;
@@ -644,17 +651,17 @@ import navItems from '../data/navItems.json'
 
    }
 
-   .header-popup-temp-details {
+   .popup-temp {
       margin: 0 30px 14px;
       padding: 5px 30px 0px 0px;
 
-      &__temp-options {
+      &__options {
         display: flex;
         align-items: center;
         cursor: pointer;
         flex-wrap: wrap;
 
-        &__list {
+       .popup-temp-list {
           display: flex;
           list-style: none;
           border: 1px solid #dee0e3;
@@ -673,23 +680,25 @@ import navItems from '../data/navItems.json'
         
         }
 
-        &__temp-indicator {
+        
+      }
+
+ }
+
+ .popup-temp-indicator {
         font-size: 13px;
         padding-left: 10px;
         padding-top: 5px;
         color: rgb(111, 117, 133);
-        }
-      }
-
-          }
+  }
 
 
-  .header-search-section {
+  .search-section {
       max-width: 380px;
       width: 100%;
       margin: 0 auto;
 
-      .header-input-wrapper {
+      .input-wrapper {
 
         display: flex;
         align-items: center;
@@ -735,7 +744,7 @@ import navItems from '../data/navItems.json'
     }
     }
 
-    .header-lang-select-section {
+    .lang-select {
       padding-top: 10px;
       margin-left: 16px;
       &__button {
@@ -818,9 +827,9 @@ import navItems from '../data/navItems.json'
 
   //media query
   @media screen and (max-width:850px){
-    .header-search-section { 
-      &__input-tag-wrapper {
-        &__input-tag { 
+    .search-section { 
+      .input-wrapper {
+        &__input { 
          padding-right: 30px;  
         }
       }
@@ -828,54 +837,57 @@ import navItems from '../data/navItems.json'
   }
 
   @media screen and (max-width:790px) {
-    .header__main-nav-wrapper__content__more-forecasts-options {
+  
+    .forecasts-options {
       padding-right: 20px;
     }
+    
   }
 
   @media screen and (max-width:600px){
-    .header__main-nav-wrapper__content__nav__link:nth-last-child(1) {
+    .main-nav-link:nth-last-child(1) {
       display: none;
     }
   }
 
   @media screen and (max-width:525px){
-    .header__main-nav-wrapper__content__nav__link:nth-last-child(2) {
+    .main-nav-link:nth-last-child(2) {
       display: none;
     }
   }
 
   @media screen and (max-width:500px){
-   
-   .header__top-section__content {
+   .header {
+   .top-section{ 
+    &__content {
     flex-direction: column;
     height: fit-content;
     gap: 15px;
    }
+  }
+}
 
-   .header__city-weather-indicator__content__card {
+   .weather-indicator-card {
     margin: 0;
    }
-   .header__main-nav-wrapper__content__more-forecasts-options {
+   .forecasts-options {
       padding-left: 0px;
       padding-right: 10px;
       margin: 0px;
     }
 
-    .header__main-nav-wrapper__content__nav__link {
+    .main-nav-link {
       padding: 0px;
     }
   }
 
   @media screen and (max-width:425px) {
-     .header-popup-temp-details {
+     .popup-temp {
       margin: 0px 10px 14px 10px;
+     }
 
-      &__temp-options {
-        &__temp-indicator {
-          padding-left: 0px;
-        }
-      }
+     .popup-temp-indicator {
+      padding-left: 0px;
      }
   }
 
