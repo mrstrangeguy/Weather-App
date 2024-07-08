@@ -53,6 +53,7 @@ defineProps<{
       line-height: 14.95px;
       outline-width: 0px;
       font-weight: 700;
+      cursor: pointer;
     }
   }
 
