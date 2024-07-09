@@ -4,174 +4,120 @@
       <div class="top-section__content">
         <div class="logo-section">
           <a class="logo-section__link">
-            <img
-              class="logo-section__link__img header-logo"
-              src="../images/logo-header.svg"
-              alt="weather-app-icon"
-            />
+            <img class="logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon" />
           </a>
           <div class="logo-section__divider"></div>
           <a class="logo-section__logo2-link">
-            <img
-              class="logo-section__logo2-link__img header-logo"
-              src="../images/toi-logo.png"
-              alt="toi-icon"
-            />
+            <img class="logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon" />
           </a>
         </div>
         <div class="top-section__content__main-menu-section">
           <div class="search-section">
             <div class="input-wrapper">
-              <input
-                :class="{
-                  'focused-input': booleanData?.isInputFocused,
-                  'input-wrapper__input': true,
-                }"
-                :placeholder="labelData?.searchPlaceholder"
-                ref="inputRef"
-                @focus="onFocus"
-                @focusout="onFocusOut"
-                type="text"
-              />
-              <img
-                class="input-wrapper__logo header-logo"
-                src="../images/search-icon.svg"
-                alt="search-icon"
-              />
+              <input :class="{
+                'focused-input': visibilityChecks?.isInputFocused,
+                'input-wrapper__input': true,
+              }" :placeholder="labelData?.searchPlaceholder" ref="inputRef" @focus="onSearchFocus"
+                @focusout="onSearchFocusOut" type="text" />
+              <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
             </div>
           </div>
           <div class="lang-select">
-            <button
-              :class="{
-                'temp-options-btn-outline':
-                  booleanData?.isExpandableMenuVisible,
-                'lang-select__button': true,
-                'header-btn': true,
-              }"
-              @click.stop="onToggleTemperatureMenu()"
-            >
-              <div class="lang-select__button__icons">
-                <img
-                  src="../images/globe-icon.svg"
-                  alt="globe-icon"
-                  class="lang-select__button__icons--globe"
-                />
-                <span class="lang-select__button__icons__text--country">{{
+            <button :class="{
+              'temp-options-btn-outline':
+                visibilityChecks?.isExpandableMenuVisible,
+              'lang-select__button': true,
+              'header-btn': true,
+            }" @click.stop="onToggleTemperatureMenu()">
+              <div class="lang-select__button">
+                <img src="../images/globe-icon.svg" alt="globe-icon" class="lang-select__button--globe" />
+                <span class="lang-select__button--country">{{
                   headerData?.country
-                }}</span>
-                <span class="lang-select__button__icons__text--temp">{{
-                  getCurrentTempIndicator
-                }}</span>
-                <img
-                  src="../images/arrow-down.svg"
-                  alt="angle-icon"
-                  :class="{
-                    'rotate-icon': booleanData?.isExpandableMenuVisible,
-                    'lang-select__button__icons--down-arrow': true,
-                  }"
-                />
+                  }}</span>
+                <span class="lang-select__button--temp">{{
+                  currentTemperatureIndicator
+                  }}</span>
+                <img src="../images/arrow-down.svg" alt="angle-icon" :class="{
+                  'rotate-icon': visibilityChecks?.isExpandableMenuVisible,
+                  'lang-select__button--down-arrow': true,
+                }" />
               </div>
             </button>
           </div>
           <div class="options-toggle">
-            <button
-              class="header-btn options-toggle__button"
-              @click.stop="onToggleTopicsMenu"
-            >
-              <span
-                :class="{
-                  'close-icon': booleanData?.isExpandableTopicsMenuVisible,
-                  'hamburger-icon': true,
-                }"
-              ></span>
+            <button class="header-btn options-toggle__button" @click.stop="onToggleTopicsMenu">
+              <span :class="{
+                'close-icon': visibilityChecks?.isExpandableTopicsMenuVisible,
+                'hamburger-icon': true,
+              }"></span>
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      v-if="booleanData?.isExpandableMenuVisible"
-      class="header-popup temperature-menu"
-      @click.stop
-    >
+    <div v-if="visibilityChecks?.isExpandableMenuVisible" class="header-popup temperature-menu" @click.stop>
       <div class="temperature-menu__content">
         <div class="popup-temp">
           <div class="popup-temp__options">
             <ul class="popup-temp-list">
-              <li
-                :class="`popup-temp-list__line ${getTempOptionStyle('°F')}`"
-                @click.stop="onTempScaleChange('°F')"
-              >
+              <li :class="{
+                'popup-temp-list__line': true,
+                'selected-temp': isCurrentTempOption('°F'),
+                temp: !isCurrentTempOption('°F'),
+              }" @click.stop="onTempScaleChange('°F')">
                 °F
               </li>
-              <li
-                :class="`popup-temp-list__line ${getTempOptionStyle('°C')}`"
-                @click.stop="onTempScaleChange('°C')"
-              >
+              <li :class="{
+                'popup-temp-list__line': true,
+                'selected-temp': isCurrentTempOption('°C'),
+                temp: !isCurrentTempOption('°C'),
+              }" @click.stop="onTempScaleChange('°C')">
                 °C
               </li>
-              <li
-                :class="`popup-temp-list__line ${getTempOptionStyle('Hybrid')}`"
-                @click.stop="onTempScaleChange('Hybrid')"
-              >
+              <li :class="{
+                'popup-temp-list__line': true,
+                'selected-temp': isCurrentTempOption('Hybrid'),
+                temp: !isCurrentTempOption('Hybrid'),
+              }" @click.stop="onTempScaleChange('Hybrid')">
                 Hybrid
               </li>
             </ul>
-            <div class="popup-temp-indicator">{{ getUnitDescription }}</div>
+            <div class="popup-temp-indicator">{{ currentUnitDescription }}</div>
           </div>
         </div>
         <div class="country-list">
-          <div
-            v-for="(elem, index) in headerCountryData"
-            :key="index"
-            class="country-list__item"
-            @click.stop="setCurrentSelectId(elem.id)"
-          >
-            <div
-              :class="{
-                'country-list__item__header': true,
-                'disable-border': index === headerCountryData.length - 1,
-                'outline--black': elem.id === currentCountryId,
-              }"
-            >
+          <div v-for="(elem, index) in headerCountryData" :key="index" class="country-list__item"
+            @click.stop="setCurrentSelectId(elem.id)">
+            <div :class="{
+              'country-list__item__header': true,
+              'disable-border': isBorderDisabled(index),
+              'outline--black': isOutlinePresent(elem.id),
+            }">
               <div class="country-list__item__header__title">
                 {{ elem.region }}
               </div>
-              <img
-                :class="{
-                  'country-list__item__header__icon': true,
-                  'rotate-country-list-icon': currentCountryId === elem.id,
-                }"
-                src="../images/arrow-down-blue.svg"
-                alt="angle-icon"
-              />
+              <img :class="{
+                'country-list__item__header__icon': true,
+                'rotate-country-list-icon': isRotateEnabled(elem.id),
+              }" src="../images/arrow-down-blue.svg" alt="angle-icon" />
             </div>
-            <CountryList v-if="currentCountryId === elem.id" />
+            <CountryList v-if="isListPresent(elem.id)" />
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      v-if="booleanData?.isExpandableTopicsMenuVisible"
-      class="header-popup topics-menu"
-      @click.stop
-    >
+    <div v-if="visibilityChecks?.isExpandableTopicsMenuVisible" class="header-popup topics-menu" @click.stop>
       <div class="topics-menu__content">
         <div class="topics-menu-navs">
-          <nav
-            v-for="elem in headerTopicsData"
-            :key="elem.id"
-            class="topics-menu-navs__nav"
-          >
-            <span class="topics-menu-navs__nav__heading">{{ elem.title }}</span>
-            <button
-              v-for="(btnData, index) in elem.details"
-              :key="index"
-              class="header-btn topics-menu-navs__nav__button"
-            >
-              {{ btnData }}
+          <nav v-for="topicNav in headerTopicsData" :key="topicNav.id" class="topics-menu-navs__nav">
+            <span class="topics-menu-navs__nav__heading">{{
+              topicNav.title
+              }}</span>
+            <button v-for="(navItem, index) in topicNav.details" :key="index"
+              class="header-btn topics-menu-navs__nav__button">
+              {{ navItem }}
             </button>
           </nav>
         </div>
@@ -182,22 +128,16 @@
       <div class="header-contents-container weather-indicator__content">
         <div class="weather-indicator-card">
           <a class="weather-indicator-card__link">
-            <img
-              src="../images/Foggy.svg"
-              alt="angle-icon"
-              class="weather-indicator-card__link__img"
-            />
+            <img src="../images/Foggy.svg" alt="angle-icon" class="weather-indicator-card__link__img" />
             <span class="weather-indicator-card__link__text">{{
               headerData?.currentWeatherDetails?.temp
-            }}</span>
+              }}</span>
           </a>
 
           <a class="weather-indicator-card__link">
-            <span class="weather-indicator-card__link__text--city-name"
-              >{{ headerData?.currentWeatherDetails?.city }},{{
-                headerData?.currentWeatherDetails?.state
-              }}</span
-            >
+            <span class="weather-indicator-card__link__text--city-name">{{ headerData?.currentWeatherDetails?.city }},{{
+              headerData?.currentWeatherDetails?.state
+            }}</span>
           </a>
         </div>
       </div>
@@ -206,53 +146,39 @@
     <div class="main-nav">
       <div class="header-contents-container main-nav__content">
         <nav class="main-nav__content__nav">
-          <a
-            v-for="(item, index) in navData"
-            :key="index"
-            class="main-nav-link"
-          >
+          <a v-for="(item, index) in navData" :key="index" class="main-nav-link">
             <span class="main-nav-link__text">{{ item }}</span>
           </a>
         </nav>
-        <div
-          :class="{
-            'temp-options-btn-outline':
-              booleanData?.isMoreForecastsOptionVisible,
-            'forecasts-options': true,
-          }"
-        >
-          <button
-            class="header-btn forecasts-options__button"
-            @click.stop="onToggleForecastOption"
-          >
+        <div :class="{
+          'temp-options-btn-outline':
+            visibilityChecks?.isMoreForecastsOptionVisible,
+          'forecasts-options': true,
+        }">
+          <button class="header-btn forecasts-options__button" @click.stop="onToggleForecastOption">
             <span class="forecasts-options__button__text">{{
               labelData?.forecastText
-            }}</span>
-            <img
-              :class="{
-                'rotate-icon margin-changes':
-                  booleanData?.isMoreForecastsOptionVisible,
-                'forecasts-options__button__icon': true,
-              }"
-              src="../images/arrow-down.svg"
-              alt="angle-icon"
-            />
+              }}</span>
+            <img :class="{
+              'rotate-icon margin-changes':
+                visibilityChecks?.isMoreForecastsOptionVisible,
+              'forecasts-options__button__icon': true,
+            }" src="../images/arrow-down.svg" alt="angle-icon" />
           </button>
-          <div
-            v-if="booleanData?.isMoreForecastsOptionVisible"
-            class="forecasts-popup"
-          >
-            <h3 class="forecasts-popup__heading">Special Forecasts</h3>
+          <div v-if="visibilityChecks?.isMoreForecastsOptionVisible" class="forecasts-popup">
+            <h3 class="forecasts-popup__heading">
+              {{ forecastOptions.title }}
+            </h3>
             <div class="forecasts-popup-description">
               <a class="forecasts-popup-description__link">
-                <span class="forecasts-popup-description__link__text"
-                  >Allergy Tracker</span
-                >
+                <span class="forecasts-popup-description__link__text">{{
+                  forecastOptions.allergyTracker
+                  }}</span>
               </a>
               <a class="forecasts-popup-description__link">
-                <span class="forecasts-popup-description__link__text"
-                  >Air Quality Forecast</span
-                >
+                <span class="forecasts-popup-description__link__text">{{
+                  forecastOptions.airQualitiy
+                  }}</span>
               </a>
             </div>
           </div>
@@ -263,19 +189,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, onUnmounted } from "vue";
 
-import countryDataType from "../types/coutryDataType";
+import countryDataType from "../types/countryDataType";
 import topicsDataType from "../types/topicsDataType";
 import headerDataType from "../types/headerDataType";
 import labelDataType from "../types/labelDataType";
 import booleanDataType from "../types/booleanDataType";
+import { forecastOptions } from "../types/foreCastOptionsEnum";
 import countryData from "../data/countryData.json";
 import navItems from "../data/navItems.json";
 import topicsData from "../data/topicsData.json";
 import headerDetails from "../data/headerDetails.json";
 import labelDetails from "../data/labelDetails.json";
-import booleanDetails from "../data/booleanDetails.json";
+import visibilityDetails from "../data/visibilityDetails.json";
 import CountryList from "./Countrylist.vue";
 
 const headerCountryData = ref<countryDataType[]>([]);
@@ -285,7 +212,7 @@ const navData = ref<string[]>([]);
 
 const headerData = ref<headerDataType>();
 const labelData = ref<labelDataType>();
-const booleanData = ref<booleanDataType>();
+const visibilityChecks = ref<booleanDataType>();
 
 //onMounted
 onMounted(() => {
@@ -294,79 +221,87 @@ onMounted(() => {
   navData.value = navItems;
   headerData.value = headerDetails;
   labelData.value = labelDetails;
-  booleanData.value = booleanDetails;
+  visibilityChecks.value = visibilityDetails;
 
   window.addEventListener("click", () => {
     closeAllPopup();
   });
 
   window.addEventListener("resize", onResponsive);
+});
 
-  return () => {
-    window.removeEventListener("click", closeAllPopup);
-    window.removeEventListener("resize", onResponsive);
-  };
+//onUnmounted
+onUnmounted(() => {
+  window.removeEventListener("click", closeAllPopup);
+  window.removeEventListener("resize", onResponsive);
 });
 
 //computed
-const getUnitDescription = computed(() => {
-  if (headerData?.value?.currentTempScale === "°F")
+const currentUnitDescription = computed(() => {
+  if (headerData?.value?.currentTempScale === "°F") {
     return "Imperial - F / mph / miles / inches";
-  else if (headerData?.value?.currentTempScale === "°C")
+  } else if (headerData?.value?.currentTempScale === "°C") {
     return "Metric - C / millimeters / km / kmh / millibars";
-  else return "Hybrid - C / millimeters / miles / mph / millibars";
+  } else {
+    return "Hybrid - C / millimeters / miles / mph / millibars";
+  }
 });
 
-const getCurrentTempIndicator = computed(() =>
+const currentTemperatureIndicator = computed(() =>
   headerData?.value?.currentTempScale === "Hybrid"
     ? "°C"
     : headerData?.value?.currentTempScale
 );
 
+const isListPresent = (id: number) => currentCountryId.value === id;
+
 //functions
 const setCurrentSelectId = (id: number) => {
-  if (currentCountryId.value === id) currentCountryId.value = -1;
-  else currentCountryId.value = id;
+  if (currentCountryId.value === id) {
+    currentCountryId.value = -1;
+  } else {
+    currentCountryId.value = id;
+  }
 };
 
 const onToggleTemperatureMenu = () => {
-  if (!booleanData.value) return;
+  if (!visibilityChecks.value) return;
 
-  booleanData.value.isExpandableMenuVisible =
-    !booleanData.value.isExpandableMenuVisible;
+  visibilityChecks.value.isExpandableMenuVisible =
+    !visibilityChecks.value.isExpandableMenuVisible;
 
-  booleanData.value.isExpandableTopicsMenuVisible = false;
+  visibilityChecks.value.isExpandableTopicsMenuVisible = false;
 };
 
 const onToggleTopicsMenu = () => {
-  if (!booleanData.value) return;
-  booleanData.value.isExpandableTopicsMenuVisible =
-    !booleanData.value.isExpandableTopicsMenuVisible;
+  if (!visibilityChecks.value) return;
+  visibilityChecks.value.isExpandableTopicsMenuVisible =
+    !visibilityChecks.value.isExpandableTopicsMenuVisible;
 
-  booleanData.value.isExpandableMenuVisible = false;
-  booleanData.value.isMoreForecastsOptionVisible = false;
+  visibilityChecks.value.isExpandableMenuVisible = false;
+  visibilityChecks.value.isMoreForecastsOptionVisible = false;
 };
 
 const closeAllPopup = () => {
-  if (!booleanData.value) return;
+  if (!visibilityChecks.value) return;
 
-  booleanData.value.isExpandableMenuVisible = false;
-  booleanData.value.isExpandableTopicsMenuVisible = false;
-  booleanData.value.isMoreForecastsOptionVisible = false;
+  visibilityChecks.value.isExpandableMenuVisible = false;
+  visibilityChecks.value.isExpandableTopicsMenuVisible = false;
+  visibilityChecks.value.isMoreForecastsOptionVisible = false;
 };
 
-const onFocus = () => {
-  if (!booleanData.value) return;
-  booleanData.value.isInputFocused = true;
+const onSearchFocus = () => {
+  if (!visibilityChecks.value) return;
+  visibilityChecks.value.isInputFocused = true;
 };
 
-const onFocusOut = () => {
-  if (!booleanData.value) return;
-  booleanData.value.isInputFocused = false;
+const onSearchFocusOut = () => {
+  if (!visibilityChecks.value) return;
+  visibilityChecks.value.isInputFocused = false;
 };
 
-const getTempOptionStyle = (tempUnit: string) =>
-  headerData?.value?.currentTempScale === tempUnit ? "selected-temp" : "temp";
+const isCurrentTempOption = (temperatureUnit: string) =>
+  temperatureUnit === headerData?.value?.currentTempScale;
 
 const onTempScaleChange = (tempUnit: string) => {
   if (!headerData.value) return;
@@ -376,10 +311,10 @@ const onTempScaleChange = (tempUnit: string) => {
 };
 
 const onToggleForecastOption = () => {
-  if (!booleanData.value) return;
+  if (!visibilityChecks.value) return;
 
-  booleanData.value.isMoreForecastsOptionVisible =
-    !booleanData.value.isMoreForecastsOptionVisible;
+  visibilityChecks.value.isMoreForecastsOptionVisible =
+    !visibilityChecks.value.isMoreForecastsOptionVisible;
 };
 
 const onResponsive = () => {
@@ -396,6 +331,13 @@ const onResponsive = () => {
     labelData.value.forecastText = "";
   }
 };
+
+const isBorderDisabled = (index: number) =>
+  index === headerCountryData.value.length - 1;
+
+const isOutlinePresent = (id: number) => id === currentCountryId.value;
+
+const isRotateEnabled = (id: number) => currentCountryId.value === id;
 </script>
 
 <style lang="scss" scoped>
@@ -434,62 +376,57 @@ const onResponsive = () => {
   background-color: rgb(255, 255, 255);
   cursor: pointer;
   border-radius: 2px;
-}
 
-.hamburger-icon::before {
-  display: block;
-  position: absolute;
-  content: "";
-  transform: 50% 50%;
-  background: #fff;
-  width: 30px;
-  max-width: 30px;
-  // border: 2px solid #fff;
-  background-color: white;
-  font-size: 16px;
-  border-radius: 2px;
-  height: 3px;
-  line-height: 18.4px;
-  bottom: -8px;
-  // left: -1px;
-  transition: all 0.3s ease;
-}
+  &::before {
+    display: block;
+    position: absolute;
+    content: "";
+    transform: 50% 50%;
+    background: #fff;
+    width: 30px;
+    background-color: white;
+    font-size: 16px;
+    border-radius: 2px;
+    height: 3px;
+    line-height: 18.4px;
+    bottom: -8px;
+    transition: all 0.3s ease;
+  }
 
-.hamburger-icon::after {
-  display: block;
-  position: absolute;
-  content: "";
-  transform: 50% 50%;
-  background: #fff;
-  width: 30px;
-  max-width: 30px;
-  // border: 2px solid #fff;
-  background-color: white;
-  font-size: 16px;
-  border-radius: 2px;
-  height: 3px;
-  line-height: 18.4px;
-  bottom: 50%;
-  // left: -1px;
-  top: -8px;
-  transition: all 0.3s ease;
+  &::after {
+    display: block;
+    position: absolute;
+    content: "";
+    transform: 50% 50%;
+    background: #fff;
+    width: 30px;
+    max-width: 30px;
+    background-color: white;
+    font-size: 16px;
+    border-radius: 2px;
+    height: 3px;
+    line-height: 18.4px;
+    bottom: 50%;
+    top: -8px;
+    transition: all 0.3s ease;
+  }
 }
 
 .close-icon {
   transition: all 0.3s ease;
   background: transparent;
-}
 
-.close-icon::before {
-  transform: rotate(45deg);
-  top: 0;
-  transition: all 0.3s ease;
-}
+  &::before {
+    transform: rotate(45deg);
+    top: 0;
+    transition: all 0.3s ease;
+  }
 
-.close-icon::after {
-  transform: rotate(-45deg);
-  top: 0;
-  transition: all 0.3s ease;
+  &::after {
+    transform: rotate(-45deg);
+    top: 0;
+    transition: all 0.3s ease;
+  }
 }
 
 .header-popup {
@@ -524,6 +461,7 @@ const onResponsive = () => {
 
   .top-section {
     background-color: rgb(0, 89, 134);
+
     &__content {
       max-width: 1280px;
       margin: 0 auto;
@@ -629,6 +567,7 @@ const onResponsive = () => {
             font-weight: 700;
             line-height: 27px;
           }
+
           &__button {
             display: block;
             text-align: left;
@@ -656,6 +595,7 @@ const onResponsive = () => {
   .main-nav {
     background-color: #003550;
     color: white;
+
     &__content {
       display: flex;
       align-items: center;
@@ -780,13 +720,16 @@ const onResponsive = () => {
       width: 60px;
     }
   }
+
   &__divider {
     margin: 0px 15px;
     border-left: 2px solid rgb(255, 255, 255);
     height: 27px;
   }
+
   &__logo2-link {
     display: block;
+
     &__img {
       display: block;
       aspect-ratio: 1567/302;
@@ -882,42 +825,38 @@ const onResponsive = () => {
 .lang-select {
   padding-top: 10px;
   margin-left: 16px;
+
   &__button {
     line-height: 18.4px;
 
-    &__icons {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    line-height: 16.1px;
+
+    &--globe {
+      padding-left: 10px;
       line-height: 16.1px;
+    }
 
-      &__icon {
-        &--globe {
-          padding-left: 10px;
-          line-height: 16.1px;
-        }
+    &--down-arrow {
+      width: 22px;
+      height: 17px;
+      display: block;
+    }
 
-        &--down-arrow {
-          width: 22px;
-          height: 17px;
-          display: block;
-        }
-      }
+    &--temp {
+      border-left: 1px solid white;
+    }
 
-      &__text {
-        &--temp {
-          border-left: 1px solid white;
-        }
-        &--country,
-        &--temp {
-          display: block;
-          padding: 0px 10px;
-          line-height: 18.4px;
-          text-align: center;
-          height: fit-content;
-        }
-      }
+    &--country,
+    &--temp {
+      display: block;
+      padding: 0px 10px;
+      line-height: 18.4px;
+      text-align: center;
+      height: fit-content;
     }
   }
 }
@@ -954,6 +893,7 @@ const onResponsive = () => {
     }
   }
 }
+
 //media query
 @media screen and (max-width: 850px) {
   .search-section {
@@ -997,6 +937,7 @@ const onResponsive = () => {
   .weather-indicator-card {
     margin: 0;
   }
+
   .forecasts-options {
     padding-left: 0px;
     padding-right: 10px;

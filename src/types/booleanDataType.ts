@@ -1,6 +1,6 @@
 export default interface booleanDataType {
-    isInputFocused:boolean,
-    isMoreForecastsOptionVisible:boolean,
-    isExpandableMenuVisible:boolean,
-    isExpandableTopicsMenuVisible:boolean
+  isInputFocused: boolean;
+  isMoreForecastsOptionVisible: boolean;
+  isExpandableMenuVisible: boolean;
+  isExpandableTopicsMenuVisible: boolean;
 }

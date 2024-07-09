@@ -1,43 +1,72 @@
 [
     {
-        "id":1,
-        "title":"forecast",
-        "details":["Today","Hourly","10-day","Weekend","Monthly"]
+        "id": 1,
+        "title": "forecast",
+        "details": [
+            "Today",
+            "Hourly",
+            "10-day",
+            "Weekend",
+            "Monthly"
+        ]
     },
     {
-        "id":2,
-        "title":"Maps",
-        "details":["Maps"]
+        "id": 2,
+        "title": "Maps",
+        "details": [
+            "Maps"
+        ]
     },
     {
-        "id":3,
-        "title":"Weather News",
-        "details":["Forecasts and News","Monsoon","Videos"]
+        "id": 3,
+        "title": "Weather News",
+        "details": [
+            "Forecasts and News",
+            "Monsoon",
+            "Videos"
+        ]
     },
     {
-        "id":4,
-        "title":"Health",
-        "details":["Allergy Tracker","COVID-19 Dashboard","COVID-19 News","Air Quality Forecast","Health News"]
+        "id": 4,
+        "title": "Health",
+        "details": [
+            "Allergy Tracker",
+            "COVID-19 Dashboard",
+            "COVID-19 News",
+            "Air Quality Forecast",
+            "Health News"
+        ]
     },
     {
-        "id":5,
-        "title":"Science",
-        "details":["Science","Hourly"]
+        "id": 5,
+        "title": "Science",
+        "details": [
+            "Science",
+            "Hourly"
+        ]
     },
     {
-        "id":6,
-        "title":"Environment",
-        "details":["Biodiversity","Climate Change","Pollution"]
+        "id": 6,
+        "title": "Environment",
+        "details": [
+            "Biodiversity",
+            "Climate Change",
+            "Pollution"
+        ]
     },
     {
-        "id":7,
-        "title":"Activities",
-        "details":["Travel and Lifestyle"]
+        "id": 7,
+        "title": "Activities",
+        "details": [
+            "Travel and Lifestyle"
+        ]
     },
     {
-        "id":8,
-        "title":"Privacy",
-        "details":["Data Rights","Privacy Policy"]
+        "id": 8,
+        "title": "Privacy",
+        "details": [
+            "Data Rights",
+            "Privacy Policy"
+        ]
     }
-
 ]

@@ -1,4 +1,4 @@
 export default interface labelDataType {
-    forecastText:string,
-    searchPlaceholder:string
+  forecastText: string;
+  searchPlaceholder: string;
 }
