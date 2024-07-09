@@ -1,14 +1,21 @@
 <template>
+<<<<<<< HEAD
   <div class="country-details">
     <div class="country-details__content">
       <div v-for="countryData in CountryList" :key="countryData.id" class="country-details__content__link">
         {{ countryData.value }}
+=======
+    <div class="country-details">
+      <div class="country-details__content">
+       <div v-for="listItem in countryList" :key="listItem.id" class="country-details__content__link">{{ listItem.value }}</div>
+>>>>>>> 71dc1cc (save commit)
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+<<<<<<< HEAD
 import { onMounted, ref } from "vue";
 
 import countriesType from "../types/countriesType";
@@ -19,6 +26,19 @@ const CountryList = ref<countriesType[]>();
 onMounted(() => {
   CountryList.value = countries;
 })
+=======
+import { onMounted, ref } from 'vue';
+
+import countryListType from '../types/countryListType';
+import countries from '../data/countries.json'
+
+const countryList = ref<countryListType[]>();
+
+onMounted(() => {
+  countryList.value = countries;
+})
+  
+>>>>>>> 71dc1cc (save commit)
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="header" @click="closeAllPopup">
     <div class="top-section">
       <div class="top-section__content">
@@ -10,6 +11,45 @@
           <a class="logo-section__logo2-link">
             <img class="logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon" />
           </a>
+=======
+    <div class="header" @click="closeAllPopup">
+        <div class="header__top-section" >
+            <div class="header__top-section__content">
+              <div class="header-logo-section">
+                <a class="header-logo-section__link">
+                   <img class="header-logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon">
+                </a>
+                <div class="header-logo-section__divider"/>
+                <a class="header-logo-section__logo2-link">
+                    <img class="header-logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon">
+                </a>
+              </div>
+              <div class="header__top-section__content__main-menu-section">
+                <div class="header-search-section">
+                    <div class="header-search-section__input-tag-wrapper">
+                    <input :class="`header-search-section__input-tag-wrapper__input-tag ${isInputFocused && 'focused-input'}`" :placeholder="searchPlaceholder" ref="inputRef" @focus="isInputFocused = true" @focusout="isInputFocused = false" type="text">
+                    <img class="header-search-section__input-tag-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon">
+                  </div>
+                </div>
+                <div class="header-lang-select-section">
+                  <button :class="`header-lang-select-section__button header-btn ${isExpandableMenuVisible && 'temp-options-btn-outline'}`" @click.stop="onToggleTemperatureMenu()">
+                    <div class="header-lang-select-section__button__icons">
+                    <img src="../images/globe-icon.svg" alt="globe-icon" class="header-lang-select-section__button__icons--globe">
+                    <span class="header-lang-select-section__button__icons__text--country">{{ country }}</span>
+                    <span class="header-lang-select-section__button__icons__text--temp">{{ getCurrentTempIndicator }}</span>
+                    <img src="../images/arrow-down.svg" alt="angle-icon" :class="`${isExpandableMenuVisible && 'rotate-icon'} header-lang-select-section__button__icons--down-arrow`">
+                    
+                    </div>
+                  </button>
+                </div>
+                <div class="header-top-options-toggle-section">
+                  <button  class="header-btn header-top-options-toggle-section__btn" @click.stop="onToggleTopicsMenu">
+                  <span :class="`hamburger-icon ${isExpandableTopicsMenuVisible && 'close-icon'}`"></span>                  
+                  </button>
+                </div>
+              </div>
+            </div>
+>>>>>>> 71dc1cc (save commit)
         </div>
         <div class="top-section__content__main-menu-section">
           <div class="search-section">
