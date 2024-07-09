@@ -6,7 +6,7 @@
           <a class="logo-section__link">
             <img class="logo-section__link__img header-logo" src="../images/logo-header.svg" alt="weather-app-icon" />
           </a>
-          <div class="logo-section__divider"></div>
+          <div class="logo-section__divider"/>
           <a class="logo-section__logo2-link">
             <img class="logo-section__logo2-link__img header-logo" src="../images/toi-logo.png" alt="toi-icon" />
           </a>
@@ -1059,7 +1059,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
     &__link {
 
       &__text {
-        
+
         text-align: right;
       }
     }
