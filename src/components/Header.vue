@@ -33,10 +33,10 @@
                 <img src="../images/globe-icon.svg" alt="globe-icon" class="lang-select__button--globe" />
                 <span class="lang-select__button--country">{{
                   headerData?.country
-                  }}</span>
+                }}</span>
                 <span class="lang-select__button--temp">{{
                   currentTemperatureIndicator
-                  }}</span>
+                }}</span>
                 <img src="../images/arrow-down.svg" alt="angle-icon" :class="{
                   'rotate-icon': visibilityChecks?.isExpandableMenuVisible,
                   'lang-select__button--down-arrow': true,
@@ -114,7 +114,7 @@
           <nav v-for="topicNav in headerTopicsData" :key="topicNav.id" class="topics-menu-navs__nav">
             <span class="topics-menu-navs__nav__heading">{{
               topicNav.title
-              }}</span>
+            }}</span>
             <button v-for="(navItem, index) in topicNav.details" :key="index"
               class="header-btn topics-menu-navs__nav__button">
               {{ navItem }}
@@ -131,13 +131,13 @@
             <img src="../images/Foggy.svg" alt="angle-icon" class="weather-indicator-card__link__img" />
             <span class="weather-indicator-card__link__text">{{
               headerData?.currentWeatherDetails?.temp
-              }}</span>
+            }}</span>
           </a>
 
           <a class="weather-indicator-card__link">
             <span class="weather-indicator-card__link__text--city-name">{{ headerData?.currentWeatherDetails?.city }},{{
               headerData?.currentWeatherDetails?.state
-            }}</span>
+              }}</span>
           </a>
         </div>
       </div>
@@ -158,7 +158,7 @@
           <button class="header-btn forecasts-options__button" @click.stop="onToggleForecastOption">
             <span class="forecasts-options__button__text">{{
               labelData?.forecastText
-              }}</span>
+            }}</span>
             <img :class="{
               'rotate-icon margin-changes':
                 visibilityChecks?.isMoreForecastsOptionVisible,
@@ -173,12 +173,12 @@
               <a class="forecasts-popup-description__link">
                 <span class="forecasts-popup-description__link__text">{{
                   forecastOptions.allergyTracker
-                  }}</span>
+                }}</span>
               </a>
               <a class="forecasts-popup-description__link">
                 <span class="forecasts-popup-description__link__text">{{
                   forecastOptions.airQualitiy
-                  }}</span>
+                }}</span>
               </a>
             </div>
           </div>
@@ -456,10 +456,12 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .header {
+
   position: relative;
   z-index: 100;
 
   .top-section {
+
     background-color: rgb(0, 89, 134);
 
     &__content {
@@ -478,6 +480,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   .temperature-menu {
+
     width: 100%;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
     position: absolute;
@@ -490,8 +493,11 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
       background-color: white;
 
       .country-list {
+
         &__item {
+
           &__header {
+
             padding: 10px 31px;
             display: flex;
             align-items: center;
@@ -502,6 +508,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
             border-radius: 2px;
 
             &__title {
+
               font-size: 18px;
               font-weight: 700;
               text-transform: uppercase;
@@ -509,10 +516,12 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
             }
 
             &__title:hover {
+
               color: #1b4de4;
             }
 
             &__icon {
+
               display: block;
               margin-left: 6px;
               line-height: 27px;
@@ -522,6 +531,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
           }
 
           &__header::after {
+
             content: "";
             height: 1px;
             background-color: #dee0e3;
@@ -536,17 +546,20 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   .topics-menu {
+
     width: 100vw;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
     position: absolute;
     background: white;
 
     &__content {
+
       max-width: 1280px;
       padding: 0px 60px;
       margin: 0 auto;
 
       .topics-menu-navs {
+
         padding: 22px 11px 11px 11px;
         width: 100%;
         display: flex;
@@ -555,6 +568,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
         flex-wrap: wrap;
 
         &__nav {
+
           display: block;
           flex-basis: calc(25% - 20px);
           flex-grow: 0;
@@ -562,6 +576,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
           padding: 4px 0px 14px 48px;
 
           &__heading {
+
             text-transform: uppercase;
             font-size: 18px;
             font-weight: 700;
@@ -569,6 +584,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
           }
 
           &__button {
+
             display: block;
             text-align: left;
             width: 100%;
@@ -579,6 +595,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
           }
 
           &__button:hover {
+
             color: #1b4de4;
           }
         }
@@ -587,20 +604,24 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   .weather-indicator {
+
     width: 100%;
     background-color: #33789e;
     color: white;
   }
 
   .main-nav {
+
     background-color: #003550;
     color: white;
 
     &__content {
+
       display: flex;
       align-items: center;
 
       &__nav {
+
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
@@ -613,27 +634,32 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .weather-indicator-card {
+
   display: flex;
   padding: 5px 15px;
   margin-left: 60px;
 
   &__link {
+
     display: flex;
     padding: 3px 5px 3px 0px;
     align-items: center;
     cursor: pointer;
 
     &__img {
+
       width: 18px;
       height: 18px;
       margin-right: 8px;
     }
 
     &__text {
+
       font-size: 14px;
       line-height: 21px;
 
       &--city-name {
+
         font-size: 14px;
       }
     }
@@ -641,6 +667,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .main-nav-link {
+
   padding: 0px 15px;
   display: block;
   cursor: pointer;
@@ -648,6 +675,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .main-nav-link:hover::after {
+
   position: absolute;
   content: "";
   width: 100%;
@@ -658,6 +686,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .forecasts-options {
+
   padding: 0px 65px 0px 20px;
   position: relative;
   height: 40px;
@@ -665,18 +694,21 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   align-items: center;
 
   &__button {
+
     display: flex;
     align-items: center;
     color: white;
     height: 100%;
 
     &__text {
+
       color: white;
       font-size: 16px;
       line-height: 18.4px;
     }
 
     &__icon {
+
       width: 22px;
       height: 17px;
       display: block;
@@ -686,7 +718,9 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .options-toggle {
+
   &__button {
+
     margin: 0px 11px 0px 25px;
     padding: 1px 6px;
     display: flex;
@@ -697,6 +731,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
     width: 30px;
 
     &__line {
+
       background-color: white;
       height: 3px;
       width: 30px;
@@ -706,15 +741,18 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .logo-section {
+
   display: flex;
   align-items: center;
   padding-right: 30px;
 
   &__link {
+
     display: block;
     padding: 5px;
 
     &__img {
+
       display: block;
       height: 60px;
       width: 60px;
@@ -722,15 +760,18 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   &__divider {
+
     margin: 0px 15px;
     border-left: 2px solid rgb(255, 255, 255);
     height: 27px;
   }
 
   &__logo2-link {
+
     display: block;
 
     &__img {
+
       display: block;
       aspect-ratio: 1567/302;
       max-height: 24px;
@@ -739,16 +780,19 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .popup-temp {
+
   margin: 0 30px 14px;
   padding: 5px 30px 0px 0px;
 
   &__options {
+
     display: flex;
     align-items: center;
     cursor: pointer;
     flex-wrap: wrap;
 
     .popup-temp-list {
+
       display: flex;
       list-style: none;
       border: 1px solid #dee0e3;
@@ -758,6 +802,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
       margin: 0;
 
       &__line {
+
         padding: 3px 18px;
         font-size: 14px;
         line-height: 21px;
@@ -768,6 +813,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .popup-temp-indicator {
+
   font-size: 13px;
   padding-left: 10px;
   padding-top: 5px;
@@ -775,16 +821,19 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .search-section {
+
   max-width: 380px;
   width: 100%;
   margin: 0 auto;
 
   .input-wrapper {
+
     display: flex;
     align-items: center;
     position: relative;
 
     &__input {
+
       display: block;
       height: 38px;
       padding: 5px 6px;
@@ -802,16 +851,19 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
     }
 
     &__input::placeholder {
+
       color: white;
       transition: opacity 0.4s ease;
       text-overflow: ellipsis;
     }
 
     &__input:placeholder-shown {
+
       text-overflow: ellipsis;
     }
 
     &__logo {
+
       position: absolute;
       display: block;
       height: 38px;
@@ -823,10 +875,12 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .lang-select {
+
   padding-top: 10px;
   margin-left: 16px;
 
   &__button {
+
     line-height: 18.4px;
 
     display: flex;
@@ -836,22 +890,26 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
     line-height: 16.1px;
 
     &--globe {
+
       padding-left: 10px;
       line-height: 16.1px;
     }
 
     &--down-arrow {
+
       width: 22px;
       height: 17px;
       display: block;
     }
 
     &--temp {
+
       border-left: 1px solid white;
     }
 
     &--country,
     &--temp {
+
       display: block;
       padding: 0px 10px;
       line-height: 18.4px;
@@ -862,6 +920,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .forecasts-popup {
+
   position: absolute;
   top: 40px;
   right: 0px;
@@ -872,6 +931,7 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   border-radius: 6px;
 
   &__heading {
+
     margin: 0;
     padding: 6px 15px 8px 15px;
     color: black;
@@ -880,14 +940,17 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 }
 
 .forecasts-popup-description {
+
   display: flex;
   color: black;
 
   &__link {
+
     font-size: 1rem;
     flex: 1 0 160px;
 
     &__text {
+
       display: block;
       padding: 5px 15px;
     }
@@ -897,8 +960,11 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 //media query
 @media screen and (max-width: 850px) {
   .search-section {
+
     .input-wrapper {
+
       &__input {
+
         padding-right: 30px;
       }
     }
@@ -907,26 +973,35 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 
 @media screen and (max-width: 790px) {
   .forecasts-options {
+
     padding-right: 20px;
   }
 }
 
 @media screen and (max-width: 600px) {
+
   .main-nav-link:nth-last-child(1) {
+
     display: none;
   }
 }
 
 @media screen and (max-width: 525px) {
+
   .main-nav-link:nth-last-child(2) {
+
     display: none;
   }
 }
 
 @media screen and (max-width: 500px) {
+
   .header {
+
     .top-section {
+
       &__content {
+
         flex-direction: column;
         height: fit-content;
         gap: 15px;
@@ -935,32 +1010,40 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   .weather-indicator-card {
+
     margin: 0;
   }
 
   .forecasts-options {
+
     padding-left: 0px;
     padding-right: 10px;
     margin: 0px;
   }
 
   .main-nav-link {
+
     padding: 0px;
   }
 }
 
 @media screen and (max-width: 425px) {
+
   .popup-temp {
+
     margin: 0px 10px 14px 10px;
   }
 
   .popup-temp-indicator {
+
     padding-left: 0px;
   }
 }
 
 @media screen and (max-width: 350px) {
+
   .forecasts-popup {
+
     height: fit-content;
     padding: 10px 0px;
 
@@ -970,10 +1053,13 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 
   .forecasts-popup-description {
+
     display: block;
 
     &__link {
+
       &__text {
+        
         text-align: right;
       }
     }
