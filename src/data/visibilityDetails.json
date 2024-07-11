@@ -2,5 +2,7 @@
     "isInputFocused": false,
     "isMoreForecastsOptionVisible": false,
     "isExpandableMenuVisible": false,
-    "isExpandableTopicsMenuVisible": false
+    "isExpandableTopicsMenuVisible": false,
+    "isResponsiveMenuVisible": false,
+    "isResponsiveSearchVisible":false
 }

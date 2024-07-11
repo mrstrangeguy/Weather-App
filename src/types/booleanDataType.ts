@@ -3,4 +3,6 @@ export default interface booleanDataType {
   isMoreForecastsOptionVisible: boolean;
   isExpandableMenuVisible: boolean;
   isExpandableTopicsMenuVisible: boolean;
+  isResponsiveMenuVisible: boolean;
+  isResponsiveSearchVisible: boolean
 }

@@ -12,14 +12,21 @@
           </a>
         </div>
         <div class="top-section__content__main-menu-section">
-          <div class="search-section">
-            <div class="input-wrapper">
+          <div  class="search-section">
+            <div class="input-wrapper" v-if="!visibilityChecks?.isResponsiveSearchVisible">
               <input :class="{
                 'focused-input': visibilityChecks?.isInputFocused,
                 'input-wrapper__input': true,
               }" :placeholder="labelData?.searchPlaceholder" ref="inputRef" @focus="onSearchFocus"
                 @focusout="onSearchFocusOut" type="text" />
               <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
+            </div>
+
+            <div class="input-wrapper input-wrapper-reponsive"  v-if="visibilityChecks?.isResponsiveSearchVisible">
+              <div class="input-wrapper__input">
+                <h1 class="responsive-input-heading">Chennai, Tamil Nadu Weather</h1>
+                <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
+              </div>
             </div>
           </div>
           <div class="lang-select">
@@ -29,7 +36,7 @@
               'lang-select__button': true,
               'header-btn': true,
             }" @click.stop="onToggleTemperatureMenu()">
-              <div class="lang-select__button">
+             
                 <img src="../images/globe-icon.svg" alt="globe-icon" class="lang-select__button--globe" />
                 <span class="lang-select__button--country">{{
                   headerData?.country
@@ -41,15 +48,16 @@
                   'rotate-icon': visibilityChecks?.isExpandableMenuVisible,
                   'lang-select__button--down-arrow': true,
                 }" />
-              </div>
+              
             </button>
           </div>
-          <div class="options-toggle">
+          <div  class="options-toggle">
             <button class="header-btn options-toggle__button" @click.stop="onToggleTopicsMenu">
-              <span :class="{
+              <span v-if="!visibilityChecks?.isResponsiveMenuVisible" :class="{
                 'close-icon': visibilityChecks?.isExpandableTopicsMenuVisible,
                 'hamburger-icon': true,
               }"></span>
+              <img class="options-toggle__button__icon" v-if="visibilityChecks?.isResponsiveMenuVisible" src="../images/menu-responsive.svg" alt="">
             </button>
           </div>
         </div>
@@ -330,10 +338,21 @@ const onResponsive = () => {
   if (window.innerWidth <= 630) {
     labelData.value.forecastText = "";
   }
+
+  if (window.innerWidth <= 500 && visibilityChecks.value) {
+    visibilityChecks.value.isResponsiveMenuVisible = true;
+    visibilityChecks.value.isResponsiveSearchVisible = true;
+  }
+
+  if(window.innerWidth > 500 && visibilityChecks.value) {
+    visibilityChecks.value.isResponsiveMenuVisible = false;
+    visibilityChecks.value.isResponsiveSearchVisible = false;
+
+  }
+
 };
 
-const isBorderDisabled = (index: number) =>
-  index === headerCountryData.value.length - 1;
+const isBorderDisabled = (index: number) => index === headerCountryData.value.length - 1;
 
 const isOutlinePresent = (id: number) => id === currentCountryId.value;
 
@@ -730,6 +749,12 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
     height: 30px;
     width: 30px;
 
+    &__icon {
+      height: 32px;
+      width: 32px;
+      display: block;
+    }
+
     &__line {
 
       background-color: white;
@@ -996,34 +1021,86 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 
 @media screen and (max-width: 500px) {
 
+  .input-wrapper-reponsive {
+    .header-logo {
+      position: relative;
+      display: block;
+    }
+
+    .responsive-input-heading {
+      margin: 0;
+      white-space: nowrap;
+      font-size: 14px;
+      line-height: 16.1px;
+      flex-grow: 1;
+      width: fit-content;
+    }
+  }
+
   .header {
-
     .top-section {
-
-      &__content {
-
-        flex-direction: column;
+       &__content {
+        padding: 0;
         height: fit-content;
-        gap: 15px;
+       }
+    }
+  }
+
+  .options-toggle {
+    &__button {
+      margin: 0;
+      padding: 5px;
+    }
+  }
+
+  .logo-section {
+    padding-right: 0px;
+    &__link {
+      padding: 11px 10px;
+      &__img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    &__divider {
+      display: none;
+    }
+
+    &__logo2-link {
+      &__img {
+        max-height: 20px;
       }
     }
   }
 
-  .weather-indicator-card {
-
-    margin: 0;
+  .lang-select {
+    display: none;
   }
 
-  .forecasts-options {
+  .search-section {
+    max-width: none;
+    .input-wrapper {
+      height: 28px;
 
-    padding-left: 0px;
-    padding-right: 10px;
-    margin: 0px;
-  }
+      &__input {
+        height: 28px;
+        padding: 0px 5px 0px 10px;
+        display: flex;
+        align-items: center;
+              
+        &::placeholder {
+        font-size: 14px;
+        text-align: left;
+        }
+      }
 
-  .main-nav-link {
-
-    padding: 0px;
+      &__logo {
+        height: 20px;
+        width: 20px;
+        top: 15%;
+      }
+    }
   }
 }
 
