@@ -20,9 +20,20 @@
   scrollbar-gutter: stable;
 }
 
+.common-button-style {
+  display: block;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
 .header-contents-container {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.rotate-icon {
+  transform: rotate(180deg);
 }
 
 body {
@@ -34,3 +45,7 @@ body {
   background-attachment: fixed;
   background-image: linear-gradient(0deg,#d8eeee,#d8eeee 25%,#64b3c9 65%,#005986 90%,#005986);
 }
+
+/* #app {
+  position: relative;
+} */

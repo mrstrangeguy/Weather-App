@@ -6,11 +6,16 @@
     <Newscard :title="pageData?.mainCard1.title" :buttontext="pageData?.mainCard1?.buttontext" class="main-content-element">
     <template v-slot:['news-cards-content']>
     <div class="card-content-grid">
-        <div class="card-content-grid__main-content">
-         <Mainnews :image="pageData?.mainCard1.mainContentDetails.img" :title="pageData?.mainCard1.mainContentDetails.heading" :para="pageData?.mainCard1.mainContentDetails.description"/>
+        <div v-if="!isResponsive" class="card-content-grid__main-content ">
+        <Mainnews class="responsive-main-news"  :image="pageData?.mainCard1.mainContentDetails.img" :title="pageData?.mainCard1.mainContentDetails.heading" :para="pageData?.mainCard1.mainContentDetails.description"/>
+        </div> 
+        <div class="sidebar-news-wrapper">
+        <div class="card-content-grid__sidebar-content responsive-sidebar">
+        <Sidebarnews class="responsive-sidebar-news" v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
         </div>
-        <div class="card-content-grid__sidebar-content">
-        <Sidebarnews v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
+        </div> 
+        <div class="card-content-grid__sidebar-content" id="responsive-sidebar">
+        <Sidebarnews class="responsive-card" v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
         </div>
     </div>
     </template>
@@ -110,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 import { MainCardsType } from '../types/mainCardType'
 import cardsData from '../data/cardsData.json'
@@ -122,14 +127,24 @@ import Advertisementcard from './Advertisementcard.vue';
 
 const pageData = ref<MainCardsType>();
 const sidebarCards = ref<any>([]);
+const isResponsive = ref<boolean>(true);
 
 //onMounted
 onMounted(() => {
   pageData.value = cardsData;
   sidebarCards.value = trailingCardsData;
-  
+  window.addEventListener('resize',onResponsive)
 })
   
+//onUnMounted
+onUnmounted(() => {
+    window.removeEventListener('resize',onResponsive)
+})
+
+const onResponsive = () => {
+   
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -168,14 +183,13 @@ onMounted(() => {
     .card-content-grid {
         display: grid;
         grid-template-columns: 4fr 1fr;
+  
 
         &__main-content {
-        min-height: 100px;
         margin: 0px 8px 16px 0px;
         }
 
         &__sidebar-content {
-        min-height: 100px;
         margin-left: 8px;
         }
     }
@@ -260,14 +274,14 @@ onMounted(() => {
 
     .main-section-final-ad {
        grid-column: 1/3;
+       margin-right: 12px;
        margin-left: 12px;
-       width: 100%;
     }
 
     @media screen and (max-width:768px) {
     .daily-news-grid {
         grid-template-columns: 1fr;
-        background-color: lightblue;
+    
     }
 
     #current-news-container {
@@ -293,9 +307,35 @@ onMounted(() => {
         }
     }
         
+    .main-section-final-ad {
+       margin-right: 0;
+    }
+
     }
 
     @media screen and (max-width:500px) { 
+
+       .sidebar-news-wrapper{
+         overflow-x: auto;
+       }
+
+        .responsive-sidebar {
+            display: flex;
+            // overflow-x: auto;
+            width: fit-content;
+            background-color: lightblue;
+            position: relative;
+
+            .responsive-sidebar-news{
+                width: 275px;
+                margin-left: 16px;
+
+                &:nth-child(1) {
+                    margin-left: 0;
+                }
+            }
+        }
+
         .trailing-cards-row { 
             display: grid;
             grid-template-columns: repeat(2,1fr);
@@ -313,6 +353,12 @@ onMounted(() => {
             &__sidebar-content {
                 margin-left: 0;
             }
+
+            &__main-content {
+
+        margin: 0px 0px 16px 0px;
+        }
+
         }
 
     }

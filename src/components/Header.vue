@@ -1,5 +1,5 @@
 <template>
-  <div class="header" @click="closeAllPopup">
+  <div v-if="!visibilityChecks?.isResponsiveHeaderVisible" class="header" @click="closeAllPopup">
     <div class="top-section">
       <div class="top-section__content">
         <div class="logo-section">
@@ -13,7 +13,7 @@
         </div>
         <div class="top-section__content__main-menu-section">
           <div  class="search-section">
-            <div class="input-wrapper" v-if="!visibilityChecks?.isResponsiveSearchVisible">
+            <div class="input-wrapper" >
               <input :class="{
                 'focused-input': visibilityChecks?.isInputFocused,
                 'input-wrapper__input': true,
@@ -22,12 +22,6 @@
               <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
             </div>
 
-            <div class="input-wrapper input-wrapper-reponsive"  v-if="visibilityChecks?.isResponsiveSearchVisible">
-              <div class="input-wrapper__input">
-                <h1 class="responsive-input-heading">Chennai, Tamil Nadu Weather</h1>
-                <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
-              </div>
-            </div>
           </div>
           <div class="lang-select">
             <button :class="{
@@ -53,11 +47,11 @@
           </div>
           <div  class="options-toggle">
             <button class="header-btn options-toggle__button" @click.stop="onToggleTopicsMenu">
-              <span v-if="!visibilityChecks?.isResponsiveMenuVisible" :class="{
+              <span  :class="{
                 'close-icon': visibilityChecks?.isExpandableTopicsMenuVisible,
                 'hamburger-icon': true,
               }"></span>
-              <img class="options-toggle__button__icon" v-if="visibilityChecks?.isResponsiveMenuVisible" src="../images/menu-responsive.svg" alt="">
+           
             </button>
           </div>
         </div>
@@ -194,6 +188,29 @@
       </div>
     </div>
   </div>
+  <div v-else class="responsive-header">
+   <div :class="{'responsive-header__content':true,'responsive-content-change':visibilityChecks?.isResponsiveDropDownVisible}">
+    <a class="company-logo-1">
+      <img class="company-logo-1__img" src="../images/logo-header.svg" alt="responsive-header-company-icon">
+    </a>
+    <a :class="{'company-logo-2':true,'change-visibility':visibilityChecks?.isResponsiveDropDownVisible}">
+      <img src="../images/toi-logo.png" alt="responsive-header-company-icon-2" class="company-logo-2__img">
+    </a>
+
+    <div :class="{'responsive-search':true,'change-visibility':visibilityChecks?.isResponsiveDropDownVisible}">
+      <button class="responsive-search__button">
+      <h1 class="responsive-search__button__heading">{{ headerData?.currentWeatherDetails?.city }}, {{ headerData?.currentWeatherDetails?.state }} Weather</h1>
+      <img class="responsive-search__button__icon" src="../images/search-icon.svg" alt="search-search-icon">  
+    </button>
+    </div>
+
+    <div @click.stop="onToggleDropDownView" class="responsive-bars-icon" >
+      <img v-if="!visibilityChecks?.isResponsiveDropDownVisible" class="responsive-bars-icon__image" src="../images/menu-responsive.svg" alt="responsive-header-icon">
+      <img v-else class="responsive-bars-icon__image" src="../images/responsive-close-icon.svg" alt="responsive-header-icon">
+    </div>
+   </div>
+  </div>
+  <Responsivedropdown v-if="visibilityChecks?.isResponsiveDropDownVisible"/>
 </template>
 
 <script setup lang="ts">
@@ -211,6 +228,7 @@ import topicsData from "../data/topicsData.json";
 import headerDetails from "../data/headerDetails.json";
 import labelDetails from "../data/labelDetails.json";
 import visibilityDetails from "../data/visibilityDetails.json";
+import Responsivedropdown from "./Responsivedropdown.vue";
 import CountryList from "./Countrylist.vue";
 
 const headerCountryData = ref<countryDataType[]>([]);
@@ -243,6 +261,9 @@ onUnmounted(() => {
   window.removeEventListener("click", closeAllPopup);
   window.removeEventListener("resize", onResponsive);
 });
+
+//emits
+const emits = defineEmits(['toggleElementsVisbility'])
 
 //computed
 const currentUnitDescription = computed(() => {
@@ -339,15 +360,17 @@ const onResponsive = () => {
     labelData.value.forecastText = "";
   }
 
-  if (window.innerWidth <= 500 && visibilityChecks.value) {
-    visibilityChecks.value.isResponsiveMenuVisible = true;
-    visibilityChecks.value.isResponsiveSearchVisible = true;
+  if(window.innerWidth <= 510 && visibilityChecks.value) {
+    visibilityChecks.value.isResponsiveHeaderVisible = true
   }
 
-  if(window.innerWidth > 500 && visibilityChecks.value) {
-    visibilityChecks.value.isResponsiveMenuVisible = false;
-    visibilityChecks.value.isResponsiveSearchVisible = false;
+  if(window.innerWidth > 510 && visibilityChecks.value) {
+    visibilityChecks.value.isResponsiveHeaderVisible = false
+  }
 
+  if(window.innerWidth > 510 && visibilityChecks.value?.isResponsiveDropDownVisible) {
+    visibilityChecks.value.isResponsiveDropDownVisible = false;
+   emits('toggleElementsVisbility',visibilityChecks.value.isResponsiveDropDownVisible);
   }
 
 };
@@ -357,6 +380,14 @@ const isBorderDisabled = (index: number) => index === headerCountryData.value.le
 const isOutlinePresent = (id: number) => id === currentCountryId.value;
 
 const isRotateEnabled = (id: number) => currentCountryId.value === id;
+
+const onToggleDropDownView = () => {
+  if(!visibilityChecks.value) return
+
+  visibilityChecks.value.isResponsiveDropDownVisible = !visibilityChecks.value.isResponsiveDropDownVisible;
+
+  emits('toggleElementsVisbility',visibilityChecks.value.isResponsiveDropDownVisible);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -372,10 +403,6 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
 
 .temp-options-btn-outline {
   outline: 5px auto #1b4de4;
-}
-
-.rotate-icon {
-  transform: rotate(180deg);
 }
 
 .rotate-country-list-icon {
@@ -1019,127 +1046,153 @@ const isRotateEnabled = (id: number) => currentCountryId.value === id;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 510px) {
 
-  .input-wrapper-reponsive {
-    .header-logo {
-      position: relative;
-      display: block;
-    }
-
-    .responsive-input-heading {
-      margin: 0;
-      white-space: nowrap;
-      font-size: 14px;
-      line-height: 16.1px;
-      flex-grow: 1;
-      width: fit-content;
-    }
+ .responsive-header {
+ 
+    background-color: #005986;
+    z-index: 10;
+  .responsive-content-change {
+    margin: 0;
+    max-width: none;
+    width: 100%;
   }
 
-  .header {
-    .top-section {
-       &__content {
-        padding: 0;
-        height: fit-content;
-       }
-    }
-  }
+  &__content {
+    height: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  .options-toggle {
-    &__button {
-      margin: 0;
-      padding: 5px;
+   
+    .change-visibility {
+      visibility: hidden;
     }
-  }
 
-  .logo-section {
-    padding-right: 0px;
-    &__link {
+    .company-logo-1 {
+    
+      // display: block;
       padding: 11px 10px;
+
       &__img {
-        height: 40px;
+        display: block;
+        height: auto;
         width: 40px;
       }
     }
 
-    &__divider {
-      display: none;
-    }
+    .company-logo-2 {
+      display: block;
+      margin-right: 7px;
 
-    &__logo2-link {
       &__img {
+        display: block;
         max-height: 20px;
+        aspect-ratio: 1567 / 302;
       }
     }
-  }
 
-  .lang-select {
-    display: none;
-  }
+    .responsive-search {
+      max-width: 42%;
+      margin-left: 2px;
+      flex: 1 1 0;
+      width: 0 !important;
+      line-height: 28px;
 
-  .search-section {
-    max-width: none;
-    .input-wrapper {
-      height: 28px;
-
-      &__input {
-        height: 28px;
-        padding: 0px 5px 0px 10px;
+      &__button {
         display: flex;
         align-items: center;
-              
-        &::placeholder {
-        font-size: 14px;
-        text-align: left;
+        justify-content: center;
+        width: 100%;
+        padding: 0px 5px 0px 10px;
+        border-radius: 20px;
+        border: 0;
+        min-height: 28px;
+        background-color: rgba(255, 255, 255, 0.1);
+
+        &__heading {
+          font-size: 14px;
+          text-wrap: nowrap;
+          white-space: nowrap;
+          color: white;
+          font-weight: 400;
+          margin: 0;
+          line-height: 16.1px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &__icon {
+          display: block;
+          aspect-ratio: 1/1;
+          height: 20px;
+          width: 20px;
+          margin-left: 5px;
+          font-size: 16px;
         }
       }
+    }
 
-      &__logo {
-        height: 20px;
-        width: 20px;
-        top: 15%;
+    .responsive-bars-icon {
+      padding: 5px;
+      &__image {
+        display: block;
+        margin-right: 4px;
       }
     }
   }
+ }
 }
 
-@media screen and (max-width: 425px) {
-
-  .popup-temp {
-
-    margin: 0px 10px 14px 10px;
-  }
-
-  .popup-temp-indicator {
-
-    padding-left: 0px;
-  }
-}
-
-@media screen and (max-width: 350px) {
-
-  .forecasts-popup {
-
-    height: fit-content;
-    padding: 10px 0px;
-
-    &__heading {
-      text-align: right;
-    }
-  }
-
-  .forecasts-popup-description {
-
-    display: block;
-
-    &__link {
-
-      &__text {
-
-        text-align: right;
-      }
+@media screen and (max-width:480px) {
+  .responsive-header {
+    // height: 62px;
+   
+    &__content {
+      max-width: none;
+      width: 100%;
     }
   }
 }
+
+// @media screen and (max-width: 425px) {
+
+//   .popup-temp {
+
+//     margin: 0px 10px 14px 10px;
+//   }
+
+//   .popup-temp-indicator {
+
+//     padding-left: 0px;
+//   }
+// }
+
+// @media screen and (max-width: 350px) {
+
+//   .forecasts-popup {
+
+//     height: fit-content;
+//     padding: 10px 0px;
+
+//     &__heading {
+//       text-align: right;
+//     }
+//   }
+
+//   .forecasts-popup-description {
+
+//     display: block;
+
+//     &__link {
+
+//       &__text {
+
+//         text-align: right;
+//       }
+//     }
+//   }
+// }
 </style>

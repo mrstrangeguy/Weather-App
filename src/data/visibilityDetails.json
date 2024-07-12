@@ -3,6 +3,6 @@
     "isMoreForecastsOptionVisible": false,
     "isExpandableMenuVisible": false,
     "isExpandableTopicsMenuVisible": false,
-    "isResponsiveMenuVisible": false,
-    "isResponsiveSearchVisible":false
+    "isResponsiveHeaderVisible":false,
+    "isResponsiveDropDownVisible":false
 }
