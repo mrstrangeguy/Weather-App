@@ -6,17 +6,23 @@
     <Newscard :title="pageData?.mainCard1.title" :buttontext="pageData?.mainCard1?.buttontext" class="main-content-element">
     <template v-slot:['news-cards-content']>
     <div class="card-content-grid">
-        <div v-if="!isResponsive" class="card-content-grid__main-content ">
-        <Mainnews class="responsive-main-news"  :image="pageData?.mainCard1.mainContentDetails.img" :title="pageData?.mainCard1.mainContentDetails.heading" :para="pageData?.mainCard1.mainContentDetails.description"/>
-        </div> 
+
+        <div v-if="!isResponsive" class="card-content-grid__main-content responsive-main-content">
+        <Mainnews :image="pageData?.mainCard1.mainContentDetails.img" :title="pageData?.mainCard1.mainContentDetails.heading" :para="pageData?.mainCard1.mainContentDetails.description"/>
+        </div>
+
         <div class="sidebar-news-wrapper">
         <div class="card-content-grid__sidebar-content responsive-sidebar">
         <Sidebarnews class="responsive-sidebar-news" v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
         </div>
         </div> 
-        <div class="card-content-grid__sidebar-content" id="responsive-sidebar">
-        <Sidebarnews class="responsive-card" v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
+
+        <div v-if="isResponsive" class="sidebar-news-wrapper">
+        <div class="card-content-grid__sidebar-content responsive-sidebar" >
+        <Sidebarnews class="responsive-sidebar-news sidebar-news-v2" v-for="data in pageData?.mainCard1.sideBarContentDetails" :isStyleChangeEnabled="false" :img="data.img" :para="data.details"/>
         </div>
+        </div>
+
     </div>
     </template>
      </Newscard>
@@ -39,21 +45,35 @@
         <img src="https://tpc.googlesyndication.com/simgad/8415435527389080299" class="main-section-ad-row1-image advertisement-img" alt="advertisement-image">
         </template>
     </Advertisementcard>
-    <Advertisementcard class="main-content-element main-section-ad-row1-2">
+    <Advertisementcard v-if="!isResponsive" class="main-content-element main-section-ad-row1-2">
         <template v-slot:['advertisement-image']>
         <img src="https://tpc.googlesyndication.com/simgad/8755113534239921333" class="main-section-ad-row1-image advertisement-img" alt="advertisement-image">
         </template>
     </Advertisementcard>
 
      <!--Mapping Don't Miss,Top Video cards --> 
-    <Newscard v-for="elem in sidebarCards" :title="elem.title" :buttontext="elem.buttontext" class="main-content-element">
+     <template v-for="(elem,index) in sidebarCards" :key="elem.id"  >
+    <Newscard v-if="isTrailingDataVisible(index)" :title="elem.title" :buttontext="elem.buttontext" class="main-content-element">
     <template v-slot:['news-cards-content']>
+    <div class="trailing-cards-container">
     <div class="trailing-cards-row">
     <Sidebarnews v-for="data in elem.cards" :img="data.img" :para="data.description" :isStyleChangeEnabled="true" class="trailing-card"/>
     </div>
+    </div>
     </template>
     </Newscard>
+    </template>
 
+    <!--Responsive News card-->
+    <Newscard class="responsive-news-card" v-if="isResponsive" :title="sidebarCards[1].title" :buttontext="sidebarCards[1].buttontext">
+    <template v-slot:['news-cards-content']>
+    <Mainnews image="https://v.w-x.co/1720757609165_India_2_Day_TOMORROW_Thu_11_2024_23_17_39xMproxy_9fd63395-b76b-4712-99a6-55dcc6793925.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60"
+    title="WATCH: Latest India Weather Forecast: July 12"
+    para=""
+    />
+    </template>
+    </Newscard>
+    
     <Advertisementcard class="main-content-element main-section-ad-row2">
         <template v-slot:['advertisement-image']>
         <div class="main-section-ad-row2-image-wrapper">
@@ -64,7 +84,7 @@
 
     
     </div>
-    <div id="advertisements-container">
+    <div v-if="!isResponsive" id="advertisements-container">
 
     <Advertisementcard >
     <template v-slot:['advertisement-image']>
@@ -127,7 +147,7 @@ import Advertisementcard from './Advertisementcard.vue';
 
 const pageData = ref<MainCardsType>();
 const sidebarCards = ref<any>([]);
-const isResponsive = ref<boolean>(true);
+const isResponsive = ref<boolean>(false);
 
 //onMounted
 onMounted(() => {
@@ -142,7 +162,20 @@ onUnmounted(() => {
 })
 
 const onResponsive = () => {
+
+   if(window.innerWidth <= 510) {
+    isResponsive.value = true
+   }
+   if(window.innerWidth > 510) {
+    isResponsive.value = false
+   }
    
+}
+
+const isTrailingDataVisible = (index:number) => {
+   if(index !== 1) return true
+
+   return index === 1 && !isResponsive.value
 }
 
 </script>
@@ -172,6 +205,7 @@ const onResponsive = () => {
     }
 
     .main-content-element {
+        z-index: 1;
         grid-column: 1/13;
     }
 
@@ -207,10 +241,14 @@ const onResponsive = () => {
         &__card-wrapper {
             flex: 1;
             margin-left: 16px;
+
+            &:nth-child(1){
+            margin-left: 0;
+            }
         }
 
-        &__card-wrapper:nth-child(1){
-            margin-left: 0;
+        &::-webkit-scrollbar {
+                display: none;
         }
         
     }
@@ -218,6 +256,14 @@ const onResponsive = () => {
     .main-card-2__side-bar-card {
         width: 147px;
         margin-bottom: 10px;
+    }
+
+    .trailing-cards-container {
+        overflow-y: scroll;
+       
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     .trailing-cards-row {
@@ -313,17 +359,43 @@ const onResponsive = () => {
 
     }
 
-    @media screen and (max-width:500px) { 
+    @media screen and (max-width:510px) { 
+
+        .responsive-news-card {
+         grid-column: 1/13;
+        }
+
+        #current-news-container {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        .sidebar-cards-row {
+            padding-right: 16px;
+        }
+
+        .responsive-main-content {
+            display: none;
+        }
+
+        .main-section-ad-row1-1 {
+            grid-column: 1/13;
+        }
 
        .sidebar-news-wrapper{
-         overflow-x: auto;
+        width: calc(100% + 16px);
+        padding-right: 16px;
+         overflow-x: scroll;
+
+         &::-webkit-scrollbar {
+            display: none;
+         }
        }
 
         .responsive-sidebar {
             display: flex;
             // overflow-x: auto;
             width: fit-content;
-            background-color: lightblue;
             position: relative;
 
             .responsive-sidebar-news{
@@ -334,18 +406,26 @@ const onResponsive = () => {
                     margin-left: 0;
                 }
             }
+
+        .sidebar-news-v2 {
+             width: 147px;
+         }
+
+        }
+
+        .trailing-cards-container {
+            z-index: 15;
+            width: calc(100% + 16px);
+            padding-right: 16px;
         }
 
         .trailing-cards-row { 
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            column-gap: 12px;
-        }
+           width: fit-content;
 
-        .trailing-card {
-            margin: 0;
+          .trailing-card {
+            width: 147px;
+           }
         }
-
 
         .card-content-grid {
             grid-template-columns: 1fr;

@@ -1,0 +1,23 @@
+[
+    {
+        "icon":"./src/images/calender.svg",
+        "iconText":"12",
+        "description":"Today"
+    },
+    {
+        "icon":"./src/images/hourly.svg",
+        "iconText":"",
+        "description":"Hourly"
+    },
+    {
+        "icon":"./src/images/calender.svg",
+        "iconText":"",
+        "description":"10 Day"
+    },
+    {
+        "icon":"./src/images/radar.svg",
+        "iconText":"",
+        "description":"Radar"
+    }
+
+]

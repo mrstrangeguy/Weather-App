@@ -14,11 +14,12 @@
 
 <script setup lang="ts">
 
-defineProps<{
+ defineProps<{
   image:string | undefined,
   title:string | undefined,
   para:string | undefined
 }>();
+
 </script>
 
 <style lang="scss" scoped>
@@ -56,6 +57,19 @@ defineProps<{
         margin-top: 2px;
         line-height: 24px;
 
+    }
+  }
+
+  @media screen and (max-width:510px) {
+    .main-news-container {
+
+      &__title {
+        &__text {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+        }
+      }
     }
   }
 </style>

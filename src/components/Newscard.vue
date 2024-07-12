@@ -27,6 +27,7 @@ defineProps<{
     border-radius: 6px;
     box-shadow: 0 0 12px 0 rgba(0,0,0,.2);
     margin-bottom: 12px;
+    z-index: 1;
   }
 
   .news-card-heading {

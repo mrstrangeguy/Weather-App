@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer" v-if="isFooterVisible">
     <div class="footer-content">
       <div class="footer-content__social-logs">
         <div class="footer-connect-section elements-in-middle">
@@ -94,6 +94,10 @@ const data = ref();
 onMounted(() => {
   data.value = footerData;
 });
+
+defineProps<{
+  isFooterVisible:boolean;
+}>()
 </script>
 
 <style lang="scss" scoped>
