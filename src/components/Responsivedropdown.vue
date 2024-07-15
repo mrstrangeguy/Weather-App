@@ -2,35 +2,23 @@
     <div class="responsive-dropdown">
      <h2 class="heading">
         <span>{{ headingText }}</span>
-        <span class="heading__lang-select" @click="isMenuSectionSelected = !isMenuSectionSelected">
+        <span :class="{'heading__lang-select':true,'visibility-none':!isMenuSectionSelected}" @click="goToUnitSection">
         <img class="heading__lang-select__globe-icon" src="../images/responsive-globe-icon.svg" alt="globe-icon">
         <span class="heading__lang-select__text">IN</span>
         <span class="heading__lang-select__text">°C</span>
         </span>
      </h2>
 
-     <button class="common-button-style back-button" @click="isMenuSectionSelected=false">
+     <button class="common-button-style back-button" @click="goToMenu" v-if="!isMenuSectionSelected">
       <img class="back-button__icon" src="../images/arrow-left.svg" alt="back-button-icon">
       <span class="back-button__text">Back to Menu</span>
      </button>
 
-     <div class="popup-unit-select">
+     <div class="popup-unit-select" v-if="!isMenuSectionSelected">
      <PopupTempOptions :headerData="headerData" :currentUnitDescription="currentUnitDescription"/>
      </div>
 
-     <div class="menu-items">
-     <button v-for="(topic,index) in topics" class="common-button-style menu-item" @click.stop="selectOption(index)">
-    <div  class="menu-item__header" >
-        <span class="title" >{{ topic.title }}</span>
-        <img :class="{'icon':true,'rotate-icon':(index === selectedTopic)}" src="/src/images/arrow-down-blue.svg" alt="image" >
-    </div>
-    <div v-if="selectedTopic === index" class="menu-item-options" @click.stop>
-     <button v-for="currentDetails in topic.details" class="common-button-style menu-item-options__option">{{ currentDetails }}</button>
-    </div>
-    </button>
-     </div>
-
-     <ResponsiveMenuItems/>
+     <ResponsiveMenuItems :listType="isMenuSectionSelected ? 'topics':'countries'"/>
      
     </div>
     <Footer :isFooterVisible="true"/>
@@ -47,7 +35,6 @@ import ResponsiveMenuItems from './ResponsiveMenuItems.vue'
 import Footer from './Footer.vue';
 
 const topics = ref<topicsDataType[]>();
-const selectedTopic = ref<number>(-1);
 const isMenuSectionSelected = ref<boolean>(true);
 
 defineProps<{
@@ -66,9 +53,13 @@ const headingText = computed(() => {
 })
 
 //function
-const selectOption = (index:number) => {
-    if(index === selectedTopic.value) selectedTopic.value = -1;
-    else selectedTopic.value = index;
+
+const goToMenu = () => {
+    isMenuSectionSelected.value = true;
+}
+
+const goToUnitSection = () => {
+    isMenuSectionSelected.value = false;
 }
 
 
@@ -78,13 +69,12 @@ const selectOption = (index:number) => {
  .responsive-dropdown {
     background-color: white;
    
-    height: calc(100% - 62px);
+    height: fit-content;
     z-index: 9;
     width: 100%;
     overflow-y: auto;
     grid-column: 1/3;
-
-   
+  
     .menu-items {
        
         *{

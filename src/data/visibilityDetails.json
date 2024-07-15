@@ -4,5 +4,6 @@
     "isExpandableMenuVisible": false,
     "isExpandableTopicsMenuVisible": false,
     "isResponsiveHeaderVisible":false,
-    "isResponsiveDropDownVisible":false
+    "isResponsiveDropDownVisible":false,
+    "isWrapperOutlineVisible":false
 }

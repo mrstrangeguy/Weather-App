@@ -1,6 +1,6 @@
 <template>
     <div class="daily-news-grid">
-    <div class="current-weather-details">
+    <div class="current-weather-details" v-if="isResponsive">
      <div class="heading">
         <h1 class="heading__title-text">Chennai, Tamil Nadu</h1>
         <span class="heading__time-text">As of 17:15 IST</span>
@@ -424,7 +424,7 @@ const isTrailingDataVisible = (index:number) => {
     @media screen and (max-width:768px) {
     .daily-news-grid {
         grid-template-columns: 1fr;
-    
+        grid-column: 1/3;
     }
 
     #current-news-container {
@@ -457,6 +457,11 @@ const isTrailingDataVisible = (index:number) => {
     }
 
     @media screen and (max-width:510px) { 
+
+        .daily-news-grid {
+         padding-top: 62px;
+         grid-column: 1/4;
+        }
 
         .responsive-news-card {
          grid-column: 1/13;

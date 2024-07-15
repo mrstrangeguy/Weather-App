@@ -29,7 +29,7 @@ defineProps<{
     }
    .sidebar-news-container {
     margin-bottom: 16px;
-   
+    cursor: pointer;
    }
 
    .sidebar-news-container-image-wrapper {
@@ -65,6 +65,10 @@ defineProps<{
      -webkit-line-clamp:3;
      line-clamp: 3;
      overflow: hidden;
+
+     &:hover {
+      color: rgb(27, 77, 228);
+     }
      }
    }
 </style>

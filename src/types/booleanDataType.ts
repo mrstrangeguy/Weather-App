@@ -4,6 +4,6 @@ export default interface booleanDataType {
   isExpandableMenuVisible: boolean;
   isExpandableTopicsMenuVisible: boolean;
   isResponsiveHeaderVisible: boolean;
-  isResponsiveDropDownVisible: boolean
-
+  isResponsiveDropDownVisible: boolean;
+  isWrapperOutlineVisible:boolean;
 }

@@ -13,22 +13,22 @@
         </div>
         <div class="top-section__content__main-menu-section">
           <div  class="search-section">
-            <div class="input-wrapper" >
+            <div :class="{'input-wrapper':true,'wrapper-outline':visibilityChecks?.isWrapperOutlineVisible}" >
               <input :class="{
-                'focused-input': visibilityChecks?.isInputFocused,
                 'input-wrapper__input': true,
+                'focused-input': visibilityChecks?.isInputFocused,
               }" :placeholder="labelData?.searchPlaceholder" ref="inputRef" @focus="onSearchFocus"
                 @focusout="onSearchFocusOut" type="text" />
-              <img class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
+              <img @click.stop="toggleRecents" class="input-wrapper__logo header-logo" src="../images/search-icon.svg" alt="search-icon" />
             </div>
 
           </div>
           <div class="lang-select">
             <button :class="{
+               'lang-select__button': true,
+               'header-btn': true,
               'temp-options-btn-outline':
-                visibilityChecks?.isExpandableMenuVisible,
-              'lang-select__button': true,
-              'header-btn': true,
+                visibilityChecks?.isExpandableMenuVisible
             }" @click.stop="onToggleTemperatureMenu()">
              
                 <img src="../images/globe-icon.svg" alt="globe-icon" class="lang-select__button--globe" />
@@ -227,6 +227,7 @@ onMounted(() => {
 
   window.addEventListener("click", () => {
     closeAllPopup();
+
   });
 
   window.addEventListener("resize", onResponsive);
@@ -293,19 +294,19 @@ const closeAllPopup = () => {
   visibilityChecks.value.isExpandableMenuVisible = false;
   visibilityChecks.value.isExpandableTopicsMenuVisible = false;
   visibilityChecks.value.isMoreForecastsOptionVisible = false;
+  visibilityChecks.value.isWrapperOutlineVisible = false;
 };
 
 const onSearchFocus = () => {
   if (!visibilityChecks.value) return;
   visibilityChecks.value.isInputFocused = true;
+  visibilityChecks.value.isWrapperOutlineVisible = false;
 };
 
 const onSearchFocusOut = () => {
   if (!visibilityChecks.value) return;
   visibilityChecks.value.isInputFocused = false;
 };
-
-
 
 const onToggleForecastOption = () => {
   if (!visibilityChecks.value) return;
@@ -356,6 +357,12 @@ const onToggleDropDownView = () => {
 
   emits('toggleElementsVisbility',visibilityChecks.value.isResponsiveDropDownVisible);
 }
+
+const toggleRecents = () =>  {
+  if(!visibilityChecks.value) return
+
+  visibilityChecks.value.isWrapperOutlineVisible = true;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -375,6 +382,10 @@ const onToggleDropDownView = () => {
 
 .rotate-country-list-icon {
   transform: rotate(180deg);
+}
+
+.wrapper-outline {
+  outline: 5px auto rgb(229, 151, 0);
 }
 
 .header-logo {
@@ -831,6 +842,10 @@ const onToggleDropDownView = () => {
       font-size: 16px;
     }
 
+    .focused-input {
+      outline: 5px auto #fff;
+    }
+
     &__input::placeholder {
 
       color: white;
@@ -981,6 +996,11 @@ const onToggleDropDownView = () => {
  
     background-color: #005986;
     z-index: 10;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index:250;
+
   .responsive-content-change {
     margin: 0;
     max-width: none;
@@ -1086,42 +1106,4 @@ const onToggleDropDownView = () => {
   }
 }
 
-// @media screen and (max-width: 425px) {
-
-//   .popup-temp {
-
-//     margin: 0px 10px 14px 10px;
-//   }
-
-//   .popup-temp-indicator {
-
-//     padding-left: 0px;
-//   }
-// }
-
-// @media screen and (max-width: 350px) {
-
-//   .forecasts-popup {
-
-//     height: fit-content;
-//     padding: 10px 0px;
-
-//     &__heading {
-//       text-align: right;
-//     }
-//   }
-
-//   .forecasts-popup-description {
-
-//     display: block;
-
-//     &__link {
-
-//       &__text {
-
-//         text-align: right;
-//       }
-//     }
-//   }
-// }
 </style>

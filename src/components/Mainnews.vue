@@ -25,6 +25,8 @@
 <style lang="scss" scoped>
   .main-news-container {
     margin-bottom: 16px;
+    cursor: pointer;
+    
     &__image-wrapper {
       margin-bottom: 8px;
 
@@ -38,6 +40,11 @@
 
     &__title {
       margin-bottom: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(27, 77, 228);
+      }
  
       &__text {
        display: block;

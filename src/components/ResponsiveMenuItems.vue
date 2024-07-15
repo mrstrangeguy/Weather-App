@@ -1,26 +1,39 @@
 <template>
-    <div class="menu-items">
+    <div  class="menu-items">
      <button v-for="(item,index) in data" class="common-button-style menu-item" @click.stop="selectOption(index)">
     <div  class="menu-item__header" >
         <span class="title" >{{ item.title || item.region }}</span>
-        <img :class="{'icon':true,'rotate-icon':(index === selectedTopic)}" src="/src/images/arrow-down-blue.svg" alt="image" >
+        <img :class="{'icon':true,'rotate-icon':(index === selectedItem)}" src="/src/images/arrow-down-blue.svg" alt="image" >
     </div>
     <div v-if="selectedItem === index" class="menu-item-options" @click.stop>
-     <button v-for="currentDetails in (item.details | item.countries)" class="common-button-style menu-item-options__option">{{ currentDetails }}</button>
+     <button v-for="currentDetails in (item.details || item.countries)" class="common-button-style menu-item-options__option">{{ currentDetails }}</button>
     </div>
     </button>
      </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
-import topicsDataType from "../types/topicsDataType";
-import countryDataType from "../types/countryDataType";
+import {onMounted, ref} from "vue"
+import topicsData from '../data/topicsData.json'
+import countryData from '../data/countryData.json'
 
 const selectedItem = ref<number>(-1);
-defineProps<{
-    data:topicsDataType | countryDataType | undefined;
-}>()
+const data = ref();
+
+const props = defineProps<{
+    listType:string;
+}>();
+
+//onMounted
+onMounted(() => {
+    props.listType === 'topics' ? data.value = topicsData : data.value = countryData;
+})
+
+//functions
+const selectOption = (index:number) => {
+  if(selectedItem.value === index) selectedItem.value = -1;
+  else selectedItem.value = index;
+}
 
 </script>
 
