@@ -2,16 +2,16 @@
     "connnectData": {
         "title": "Connect with us",
         "icons": [
-            "/src/images/footer-images/Facebook.svg",
-            "/src/images/footer-images/Twitter.svg",
-            "/src/images/footer-images/Instagram.svg",
-            "/src/images/footer-images/Youtube.svg"
+            "/src/images/Facebook.svg",
+            "/src/images/Twitter.svg",
+            "/src/images/Instagram.svg",
+            "/src/images/Youtube.svg"
         ]
     },
     "companyIcons": [
-        "/src/images/footer-images/weather-company.svg",
-        "/src/images/footer-images/The Weather Channel-1.svg",
-        "/src/images/footer-images/Weather Underground.svg"
+        "/src/images/weather-company.svg",
+        "/src/images/The Weather Channel-1.svg",
+        "/src/images/Weather Underground.svg"
     ],
     "corporateLinks": [
         "Feedback",
@@ -25,8 +25,8 @@
         "Data Vendors"
     ],
     "attributionIcons": [
-        "/src/images/footer-images/Georgia.svg",
-        "/src/images/footer-images/essential.svg"
+        "/src/images/Georgia.svg",
+        "/src/images/essential.svg"
     ],
     "privacyPara": "We recognise our responsibility to use data and technology for good. We may use or share your data with our data vendors. Take control of your data.",
     "privacyLinks": [
