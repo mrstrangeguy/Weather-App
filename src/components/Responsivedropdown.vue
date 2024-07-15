@@ -4,8 +4,8 @@
         <span>{{ headingText }}</span>
         <span :class="{'heading__lang-select':true,'visibility-none':!isMenuSectionSelected}" @click="goToUnitSection">
         <img class="heading__lang-select__globe-icon" src="../images/responsive-globe-icon.svg" alt="globe-icon">
-        <span class="heading__lang-select__text">IN</span>
-        <span class="heading__lang-select__text">°C</span>
+        <span class="heading__lang-select__text">{{ headerData?.country }}</span>
+        <span class="heading__lang-select__text">{{ headerData?.currentTempScale }}</span>
         </span>
      </h2>
 
@@ -66,9 +66,10 @@ const goToUnitSection = () => {
 </script>
 
 <style lang="scss" scoped>
+
  .responsive-dropdown {
     background-color: white;
-   
+    padding-top: 62px;
     height: fit-content;
     z-index: 9;
     width: 100%;
