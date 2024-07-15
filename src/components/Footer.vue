@@ -9,12 +9,12 @@
           <ul class="footer-social-icons footer-list">
             <li
               class="social-icon-wrapper"
-              v-for="elem in data?.connnectData?.icons"
+              v-for="(_,index) in data?.connnectData?.icons"
             >
               <a class="social-icon-wrapper__link">
                 <img
                   class="social-icon-wrapper__link__icon social-link-img"
-                  :src="elem"
+                  :src="socialMediaIcons[index]"
                   alt="social-media-icon"
                 />
               </a>
@@ -23,9 +23,9 @@
         </div>
         <div class="footer-company-icons elements-in-middle">
           <img
-            v-for="elem in data?.companyIcons"
+            v-for="(_,index) in data?.companyIcons"
             class="footer-company-icons__icon"
-            :src="elem"
+            :src="companyIcons[index]"
             alt="company-icon"
           />
         </div>
@@ -58,9 +58,9 @@
       <div class="footer-external-attribution">
         <a
           class="footer-external-attribution__link"
-          v-for="elem in data?.attributionIcons"
+          v-for="(_,index) in data?.attributionIcons"
         >
-          <img :src="elem" alt="attribution-icon" />
+          <img :src="attributeIcons[index]" alt="attribution-icon" />
         </a>
       </div>
 
@@ -89,8 +89,21 @@
 import { onMounted, ref } from "vue";
 
 import footerData from "../data/footerData.json";
+import Facebook from '../images/Facebook.svg'
+import Twitter from '../images/Twitter.svg'
+import Instagram from '../images/Instagram.svg'
+import Youtube from '../images/Youtube.svg'
+import WeatherCompany from '../images/weather-company.svg'
+import WeatherChannel from '../images/The Weather Channel-1.svg'
+import WeatherUnderGround from '../images/Weather Underground.svg'
+import Georgia from '../images/Georgia.svg'
+import Essential from '../images/essential.svg'
 
 const data = ref();
+
+const socialMediaIcons = [Facebook,Twitter,Instagram,Youtube];
+const companyIcons = [WeatherCompany,WeatherChannel,WeatherUnderGround];
+const attributeIcons = [Georgia,Essential];
 
 //onMounted
 onMounted(() => {
