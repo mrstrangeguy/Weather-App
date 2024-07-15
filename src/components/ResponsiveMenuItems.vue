@@ -1,79 +1,90 @@
 <template>
-    <div  class="menu-items">
-     <button v-for="(item,index) in data" class="common-button-style menu-item" @click.stop="selectOption(index)">
-    <div  class="menu-item__header" >
-        <span class="title" >{{ item.title || item.region }}</span>
-        <img :class="{'icon':true,'rotate-icon':(index === selectedItem)}" src="/src/images/arrow-down-blue.svg" alt="image" >
-    </div>
-    <div v-if="selectedItem === index" class="menu-item-options" @click.stop>
-     <button v-for="currentDetails in (item.details || item.countries)" class="common-button-style menu-item-options__option">{{ currentDetails }}</button>
-    </div>
+  <div class="menu-items">
+    <button
+      v-for="(item, index) in data"
+      class="common-button-style menu-item"
+      @click.stop="selectOption(index)"
+    >
+      <div class="menu-item__header">
+        <span class="title">{{ item.title || item.region }}</span>
+        <img
+          :class="{ icon: true, 'rotate-icon': index === selectedItem }"
+          src="/src/images/arrow-down-blue.svg"
+          alt="image"
+        />
+      </div>
+      <div v-if="selectedItem === index" class="menu-item-options" @click.stop>
+        <button
+          v-for="currentDetails in item.details || item.countries"
+          class="common-button-style menu-item-options__option"
+        >
+          {{ currentDetails }}
+        </button>
+      </div>
     </button>
-     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
-import topicsData from '../data/topicsData.json'
-import countryData from '../data/countryData.json'
+import { onMounted, ref } from "vue";
+import topicsData from "../data/topicsData.json";
+import countryData from "../data/countryData.json";
 
 const selectedItem = ref<number>(-1);
 const data = ref();
 
 const props = defineProps<{
-    listType:string;
+  listType: string;
 }>();
 
 //onMounted
 onMounted(() => {
-    props.listType === 'topics' ? data.value = topicsData : data.value = countryData;
-})
+  props.listType === "topics"
+    ? (data.value = topicsData)
+    : (data.value = countryData);
+});
 
 //functions
-const selectOption = (index:number) => {
-  if(selectedItem.value === index) selectedItem.value = -1;
+const selectOption = (index: number) => {
+  if (selectedItem.value === index) selectedItem.value = -1;
   else selectedItem.value = index;
-}
-
+};
 </script>
 
 <style lang="scss" scoped>
- .menu-items {
-       
-       *{
-           cursor: pointer;
-       }
-           .menu-item {
-               padding: 0;
-               margin: 0;
-               border: 0;
-               width: 100%;
-             
-               &__header {
-                   display: flex;
-                   justify-content: space-between;
-                   align-items: center;
-                   padding: 10px 31px;
-                   border-top: 1px solid rgb(222, 222, 222);
-                   background-color: white;
+.menu-items {
+  * {
+    cursor: pointer;
+  }
+  .menu-item {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
 
-                   .title {
-                       font-size: 16px;
-                   }
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 31px;
+      border-top: 1px solid rgb(222, 222, 222);
+      background-color: white;
 
-                   .icon {
-                       height: 18px;
-                       width:18px;
-                       display: block;
-                   }
-               }
-              
-           }
+      .title {
+        font-size: 16px;
+      }
+
+      .icon {
+        height: 18px;
+        width: 18px;
+        display: block;
+      }
+    }
+  }
 }
 
 .menu-item-options {
-    
-    &__option {
+  &__option {
     background-color: white;
     width: 100%;
     text-align: left;
@@ -83,6 +94,6 @@ const selectOption = (index:number) => {
     border: 1px solid rgb(222, 222, 222);
     font-size: 16px;
     line-height: 18.4px;
-    }
+  }
 }
 </style>

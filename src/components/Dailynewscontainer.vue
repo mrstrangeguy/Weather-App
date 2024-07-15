@@ -2,18 +2,18 @@
     <div class="daily-news-grid">
     <div class="current-weather-details" v-if="isResponsive">
      <div class="heading">
-        <h1 class="heading__title-text">Chennai, Tamil Nadu</h1>
-        <span class="heading__time-text">As of 17:15 IST</span>
+        <h1 class="heading__title-text">{{ headerData?.currentWeatherDetails?.city }}, {{ headerData?.currentWeatherDetails.state }}</h1>
+        <span class="heading__time-text">As of {{ headerData?.time }}</span>
      </div>
      
      <div class="content">
      <div>
-     <span class="content__temperature">32°</span>
-     <div class="content__weather-des" >Mostly Cloudy</div>
+     <span class="content__temperature">{{ headerData?.currentWeatherDetails?.temp }}{{ headerDetails?.currentTempScale }}</span>
+     <div class="content__weather-des" >{{ headerData?.tempState }}</div>
      <div class="day-details">
-     <span class="content__day">Day 37°</span>
+     <span class="content__day">Day {{ headerData?.dayTemp }}</span>
      <span class="content__dot">•</span>
-     <span class="content__day">Night 27°</span>
+     <span class="content__day">Night {{ headerData?.nightTemp }}</span>
      </div>
      </div>
      
@@ -158,6 +158,8 @@
 import { onMounted, onUnmounted, ref } from 'vue';
 
 import { MainCardsType } from '../types/mainCardType'
+import headerDataType from '../types/headerDataType';
+import headerDetails from '../data/headerDetails.json'
 import cardsData from '../data/cardsData.json'
 import trailingCardsData from '../data/trailingCardsData.json'
 import Newscard from './Newscard.vue';
@@ -168,11 +170,13 @@ import Advertisementcard from './Advertisementcard.vue';
 const pageData = ref<MainCardsType>();
 const sidebarCards = ref<any>([]);
 const isResponsive = ref<boolean>(false);
+const headerData = ref<headerDataType>();
 
 //onMounted
 onMounted(() => {
   pageData.value = cardsData;
   sidebarCards.value = trailingCardsData;
+  headerData.value = headerDetails;
   window.addEventListener('resize',onResponsive)
 })
   

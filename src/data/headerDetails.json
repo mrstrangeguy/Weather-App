@@ -5,5 +5,9 @@
         "state": "Tamil Nadu"
     },
     "country": "IN",
-    "currentTempScale": "°C"
+    "currentTempScale": "C",
+    "time":"17:15 IST",
+    "tempState":"Mostly Cloudy",
+    "dayTemp":"37°",
+    "nightTemp":"27°"
 }

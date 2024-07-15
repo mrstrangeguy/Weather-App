@@ -48,9 +48,10 @@
           class="footer-legal-links__link-wrapper"
           v-for="elem in data?.legalLinks"
         >
-          <a class="footer-legal-links__link-wrapper__link footer-list-link footer-link">{{
-            elem
-          }}</a>
+          <a
+            class="footer-legal-links__link-wrapper__link footer-list-link footer-link"
+            >{{ elem }}</a
+          >
         </li>
       </ul>
 
@@ -70,9 +71,10 @@
             class="footer-privacy-container-list__link-wrapper"
             v-for="elem in data?.privacyLinks"
           >
-            <a class="footer-privacy-container-list__link-wrapper__link footer-link">{{
-              elem
-            }}</a>
+            <a
+              class="footer-privacy-container-list__link-wrapper__link footer-link"
+              >{{ elem }}</a
+            >
           </li>
         </ul>
         <div class="footer-privacy-container__copyright">
@@ -96,8 +98,8 @@ onMounted(() => {
 });
 
 defineProps<{
-  isFooterVisible:boolean | undefined;
-}>()
+  isFooterVisible: boolean | undefined;
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -178,9 +180,7 @@ defineProps<{
           filter: brightness(0%) invert(1);
         }
       }
-
     }
-
   }
 }
 
@@ -311,22 +311,20 @@ defineProps<{
     }
   }
 
-  .footer-social-icons  {
+  .footer-social-icons {
     width: 100%;
     justify-content: flex-start;
     gap: 12px;
 
-    .social-icon-wrapper { 
+    .social-icon-wrapper {
       &__link {
-       margin-left: 0;
+        margin-left: 0;
       }
     }
-
   }
 
   .footer-company-icons {
     justify-content: flex-start;
-
   }
 
   .footer-corporate-links {
@@ -341,6 +339,5 @@ defineProps<{
   .footer-list-link {
     padding: 0;
   }
- 
 }
 </style>

@@ -6,4 +6,5 @@ export default interface booleanDataType {
   isResponsiveHeaderVisible: boolean;
   isResponsiveDropDownVisible: boolean;
   isWrapperOutlineVisible:boolean;
+  isHamburgerOutlineVisible:boolean;
 }

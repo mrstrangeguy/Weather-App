@@ -1,52 +1,51 @@
 <template>
   <div class="country-details">
-      <div class="country-details__content">
-       <div v-for="listItem in countryList" :key="listItem.id" class="country-details__content__link">{{ listItem.value }}</div>
+    <div class="country-details__content">
+      <div
+        v-for="listItem in countryList"
+        :key="listItem.id"
+        class="country-details__content__link"
+      >
+        {{ listItem.value }}
       </div>
     </div>
-
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 
-import countryListType from '../types/countryListType';
-import countries from '../data/countries.json'
+import countryListType from "../types/countryListType";
+import countries from "../data/countries.json";
 
 const countryList = ref<countryListType[]>();
 
 onMounted(() => {
   countryList.value = countries;
-})
-  
+});
 </script>
 
 <style lang="scss" scoped>
 .country-details {
-
   min-height: 25vh;
   width: 100%;
   padding: 10px 21px;
   position: relative;
 
   &__content {
-
     display: grid;
     padding: 10px 10px 30px 10px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: repeat(13, 1fr);
 
     &__link {
-
       display: block;
       padding: 7px 0px;
     }
   }
-
 }
 
 .country-details::after {
-
   content: "";
   width: 100%;
   height: 1px;
@@ -57,24 +56,18 @@ onMounted(() => {
 }
 
 @media screen and (max-width: 1024px) {
-
   .country-details {
-
     &__content {
-
       grid-template-columns: 1fr 1fr;
     }
   }
 }
 
 @media screen and (max-width: 790px) {
-
   .country-details {
-
     padding: 0px;
 
     &__content {
-
       grid-template-columns: 1fr 1fr;
       padding: 10px 0px 30px 0px;
 
@@ -86,11 +79,8 @@ onMounted(() => {
 }
 
 @media screen and (max-width: 425px) {
-
   .country-details {
-
     &__content {
-
       grid-template-columns: 1fr;
     }
   }
