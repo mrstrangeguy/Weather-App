@@ -1,11 +1,11 @@
 <template>
   <div v-if="!isFooterVisible" class="footer-nav">
-    <a v-for="navLink in FooterNavData" class="footer-nav__link">
+    <a v-for="(navLink,index) in FooterNavData" class="footer-nav__link">
       <span v-if="navLink.iconText" class="icon-text">{{
         navLink.iconText
       }}</span>
 
-      <img class="icon" :src="navLink.icon" alt="footer-nav-image" />
+      <img class="icon" :src="footerImages[index]" alt="footer-nav-image" />
 
       <div class="description">{{ navLink.description }}</div>
     </a>
@@ -17,8 +17,15 @@ import { onMounted, ref } from "vue";
 
 import FooterNavData from "../data/footerNavData.json";
 
+//footernavimages
+import calender from '../images/calender.svg'
+import hourly from '../images/hourly.svg'
+import radar from '../images/radar.svg'
+
 //ref
 const navData = ref();
+
+const footerImages = [calender,hourly,calender,radar];
 
 defineProps<{
   isFooterVisible: boolean;
