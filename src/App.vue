@@ -41,17 +41,13 @@
   <Header @toggleElementsVisbility="mangeElementsVisibility"/>
   <Main v-if="!isElementsVisible"/>
   <Footer :isFooterVisible="isFooterVisible" id="#app-footer" v-if="!isElementsVisible"/>
- <Footernav :isFooterVisible="isFooterVisible"/>
+ <Footernav v-if="!isElementsVisible" :isFooterVisible="isFooterVisible"/>
 </template>
 
 <style lang="scss" scoped>
 .main-section {
   overflow-y: hidden;
 }
-
-#app-footer {
-    display: none;
-  }
 
 //media query
 @media screen and (max-width:510px) {

@@ -61,32 +61,7 @@
     <div v-if="visibilityChecks?.isExpandableMenuVisible" class="header-popup temperature-menu" @click.stop>
       <div class="temperature-menu__content">
         <div class="popup-temp">
-          <div class="popup-temp__options">
-            <ul class="popup-temp-list">
-              <li :class="{
-                'popup-temp-list__line': true,
-                'selected-temp': isCurrentTempOption('°F'),
-                temp: !isCurrentTempOption('°F'),
-              }" @click.stop="onTempScaleChange('°F')">
-                °F
-              </li>
-              <li :class="{
-                'popup-temp-list__line': true,
-                'selected-temp': isCurrentTempOption('°C'),
-                temp: !isCurrentTempOption('°C'),
-              }" @click.stop="onTempScaleChange('°C')">
-                °C
-              </li>
-              <li :class="{
-                'popup-temp-list__line': true,
-                'selected-temp': isCurrentTempOption('Hybrid'),
-                temp: !isCurrentTempOption('Hybrid'),
-              }" @click.stop="onTempScaleChange('Hybrid')">
-                Hybrid
-              </li>
-            </ul>
-            <div class="popup-temp-indicator">{{ currentUnitDescription }}</div>
-          </div>
+         <PopupTempOptions :headerData="headerData" :currentUnitDescription="currentUnitDescription" @closeAllPopup="closeAllPopup"/>
         </div>
         <div class="country-list">
           <div v-for="(elem, index) in headerCountryData" :key="index" class="country-list__item"
@@ -210,7 +185,7 @@
     </div>
    </div>
   </div>
-  <Responsivedropdown v-if="visibilityChecks?.isResponsiveDropDownVisible"/>
+  <Responsivedropdown :headerData="headerData" :currentUnitDescription="currentUnitDescription"  v-if="visibilityChecks?.isResponsiveDropDownVisible"/>
 </template>
 
 <script setup lang="ts">
@@ -230,6 +205,7 @@ import labelDetails from "../data/labelDetails.json";
 import visibilityDetails from "../data/visibilityDetails.json";
 import Responsivedropdown from "./Responsivedropdown.vue";
 import CountryList from "./Countrylist.vue";
+import PopupTempOptions from './PopupTempOptions.vue'
 
 const headerCountryData = ref<countryDataType[]>([]);
 const currentCountryId = ref<number>(-1);
@@ -329,15 +305,7 @@ const onSearchFocusOut = () => {
   visibilityChecks.value.isInputFocused = false;
 };
 
-const isCurrentTempOption = (temperatureUnit: string) =>
-  temperatureUnit === headerData?.value?.currentTempScale;
 
-const onTempScaleChange = (tempUnit: string) => {
-  if (!headerData.value) return;
-
-  headerData.value.currentTempScale = tempUnit;
-  closeAllPopup();
-};
 
 const onToggleForecastOption = () => {
   if (!visibilityChecks.value) return;
@@ -490,11 +458,6 @@ const onToggleDropDownView = () => {
 
 .disable-border::after {
   display: none;
-}
-
-.selected-temp {
-  background-color: rgb(27, 77, 228);
-  color: white;
 }
 
 .temp {
@@ -836,40 +799,6 @@ const onToggleDropDownView = () => {
   margin: 0 30px 14px;
   padding: 5px 30px 0px 0px;
 
-  &__options {
-
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    flex-wrap: wrap;
-
-    .popup-temp-list {
-
-      display: flex;
-      list-style: none;
-      border: 1px solid #dee0e3;
-      padding: 0px;
-      border-radius: 27px;
-      width: fit-content;
-      margin: 0;
-
-      &__line {
-
-        padding: 3px 18px;
-        font-size: 14px;
-        line-height: 21px;
-        border-radius: 27px;
-      }
-    }
-  }
-}
-
-.popup-temp-indicator {
-
-  font-size: 13px;
-  padding-left: 10px;
-  padding-top: 5px;
-  color: rgb(111, 117, 133);
 }
 
 .search-section {

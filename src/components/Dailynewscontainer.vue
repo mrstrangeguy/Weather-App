@@ -1,7 +1,27 @@
 <template>
     <div class="daily-news-grid">
+    <div class="current-weather-details">
+     <div class="heading">
+        <h1 class="heading__title-text">Chennai, Tamil Nadu</h1>
+        <span class="heading__time-text">As of 17:15 IST</span>
+     </div>
+     
+     <div class="content">
+     <div>
+     <span class="content__temperature">32°</span>
+     <div class="content__weather-des" >Mostly Cloudy</div>
+     <div class="day-details">
+     <span class="content__day">Day 37°</span>
+     <span class="content__dot">•</span>
+     <span class="content__day">Night 27°</span>
+     </div>
+     </div>
+     
+        <img class="content__main-logo" src="../images/partly-cloudy.svg" alt="">
+     
+     </div>
+    </div>
     <div id="current-news-container" >
-
     <!--Top Stories Card-->
     <Newscard :title="pageData?.mainCard1.title" :buttontext="pageData?.mainCard1?.buttontext" class="main-content-element">
     <template v-slot:['news-cards-content']>
@@ -181,6 +201,83 @@ const isTrailingDataVisible = (index:number) => {
 </script>
 
 <style lang="scss" scoped>
+
+    .current-weather-details {
+       margin: 12px 10px;
+       background-color: lightgreen;
+       grid-column: 1/3;
+       color: white;
+       text-shadow: 0 0 5px rgba(23,36,50,.5);
+       border-radius: 6px;
+       overflow: hidden;
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-position: 100%;
+       background-image: url('https://s.w-x.co/WeatherImages_Web/WeatherImage_PartlyCloudy-day_1.jpg?crop=16:9&width=800&format=pjpg&auto=webp&quality=70');
+       
+       .heading {
+        padding: 10px 16px;
+        background-color: rgba(0, 0, 0, 0.55);
+        color: white;
+
+        &__title-text {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            display: inline;
+        }
+
+        &__time-text {
+            font-size: 13px;
+            padding-left: 5px;
+        }
+       }
+
+       .content {
+        padding: 10px 16px;
+        display: flex;
+        justify-content: space-between;
+
+        .day-details {
+            margin-top: 5px;
+            font-size: 18px;
+            line-height: 19.8px;
+        }
+        
+        &__temperature {
+            font-size: 56px;
+            line-height: 56px;
+            font-weight: 500;
+        }
+
+        &__weather-des {
+            font-size: 20px;
+            line-height: 22px;
+            font-weight: 600;
+        }
+
+        &__day {
+            line-height: 19.8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        &__dot {
+            font-weight: 700;
+            padding: 0px 4px;
+            line-height: 19.8px;
+        }
+
+        &__main-logo {
+            display: block;
+            aspect-ratio: 1/1;
+            width: 64px;
+            height: 64px;
+            align-self: center;
+        }
+
+       }
+    }
     
     .daily-news-grid {
         max-width:1162px;

@@ -1,13 +1,22 @@
 <template>
     <div class="responsive-dropdown">
      <h2 class="heading">
-        <span>Menu</span>
-        <span class="heading__lang-select">
+        <span>{{ headingText }}</span>
+        <span class="heading__lang-select" @click="isMenuSectionSelected = !isMenuSectionSelected">
         <img class="heading__lang-select__globe-icon" src="../images/responsive-globe-icon.svg" alt="globe-icon">
         <span class="heading__lang-select__text">IN</span>
         <span class="heading__lang-select__text">°C</span>
         </span>
      </h2>
+
+     <button class="common-button-style back-button" @click="isMenuSectionSelected=false">
+      <img class="back-button__icon" src="../images/arrow-left.svg" alt="back-button-icon">
+      <span class="back-button__text">Back to Menu</span>
+     </button>
+
+     <div class="popup-unit-select">
+     <PopupTempOptions :headerData="headerData" :currentUnitDescription="currentUnitDescription"/>
+     </div>
 
      <div class="menu-items">
      <button v-for="(topic,index) in topics" class="common-button-style menu-item" @click.stop="selectOption(index)">
@@ -20,20 +29,40 @@
     </div>
     </button>
      </div>
+
+     <ResponsiveMenuItems/>
+     
     </div>
+    <Footer :isFooterVisible="true"/>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import topicsDataType from '../types/topicsDataType';
+import headerDataType from '../types/headerDataType';
 import topicsData from '../data/topicsData.json'
+import PopupTempOptions from './PopupTempOptions.vue';
+import ResponsiveMenuItems from './ResponsiveMenuItems.vue'
+import Footer from './Footer.vue';
 
 const topics = ref<topicsDataType[]>();
 const selectedTopic = ref<number>(-1);
+const isMenuSectionSelected = ref<boolean>(true);
+
+defineProps<{
+    headerData:headerDataType | undefined;
+    currentUnitDescription:string;
+}>()
+
 //onMounted
 onMounted(() => {
    topics.value = topicsData
+})
+
+//computed
+const headingText = computed(() => {
+    return isMenuSectionSelected.value ? 'Menu' : 'Units';
 })
 
 //function
@@ -42,19 +71,82 @@ const selectOption = (index:number) => {
     else selectedTopic.value = index;
 }
 
+
 </script>
 
 <style lang="scss" scoped>
  .responsive-dropdown {
     background-color: white;
-    position: absolute;
-    top: 62px;
+   
     height: calc(100% - 62px);
     z-index: 9;
     width: 100%;
     overflow-y: auto;
+    grid-column: 1/3;
 
-    .heading {
+   
+    .menu-items {
+       
+        *{
+            cursor: pointer;
+        }
+            .menu-item {
+                padding: 0;
+                margin: 0;
+                border: 0;
+                width: 100%;
+              
+                &__header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 31px;
+                    border-top: 1px solid rgb(222, 222, 222);
+                    background-color: white;
+
+                    .title {
+                        font-size: 16px;
+                    }
+
+                    .icon {
+                        height: 18px;
+                        width:18px;
+                        display: block;
+                    }
+                }
+               
+            }
+        }
+ }
+
+  .popup-unit-select {
+    margin: 0px 30px 14px 30px;
+  }
+
+ .back-button {
+    display: block;
+    margin: 0px 0px 32px 31px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+
+    &__icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
+
+    &__text {
+        display: block;
+        font-size: 16px;
+        line-height: 18.4px;
+        font-weight: 400;
+        color: rgb(27, 77, 228);
+        padding-left: 8px;
+    }
+ }
+
+ .heading {
         font-size: 24px;
         margin: 0;
         line-height: 36px;
@@ -90,39 +182,6 @@ const selectOption = (index:number) => {
        
     }
 
-    .menu-items {
-       
-        *{
-            cursor: pointer;
-        }
-            .menu-item {
-                padding: 0;
-                margin: 0;
-                border: 0;
-                width: 100%;
-              
-                &__header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px 31px;
-                    border-top: 1px solid rgb(222, 222, 222);
-                    background-color: white;
-
-                    .title {
-                        font-size: 16px;
-                    }
-
-                    .icon {
-                        height: 18px;
-                        width:18px;
-                        display: block;
-                    }
-                }
-               
-            }
-        }
- }
 
    .menu-item-options {
     
@@ -138,9 +197,5 @@ const selectOption = (index:number) => {
         line-height: 18.4px;
         }
     }
-
- .hello {
-    margin: 25px 0px;
- }
  
 </style>

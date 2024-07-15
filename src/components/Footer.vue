@@ -96,7 +96,7 @@ onMounted(() => {
 });
 
 defineProps<{
-  isFooterVisible:boolean;
+  isFooterVisible:boolean | undefined;
 }>()
 </script>
 
